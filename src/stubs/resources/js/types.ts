@@ -5,6 +5,9 @@ export type Nullable<T> = T | null;
 export interface Team {
   id: number;
   name: string;
+  personal_team: boolean;
+  created_at: DateTime;
+  updated_at: DateTime;
 }
 
 export interface User {
@@ -15,7 +18,7 @@ export interface User {
   profile_photo_path: Nullable<string>;
   profile_photo_url: string;
   two_factor_enabled: boolean;
-  email_verified_at: DateTime;
+  email_verified_at: Nullable<DateTime>;
   created_at: DateTime;
   updated_at: DateTime;
 }
@@ -57,5 +60,30 @@ export interface ApiToken {
   id: number;
   name: string;
   abilities: string[];
-  last_used_ago: DateTime | null;
+  last_used_ago: Nullable<DateTime>;
+  created_at: DateTime;
+  updated_at: DateTime;
+}
+
+export interface JetstreamTeamPermissions {
+  canAddTeamMembers: boolean;
+  canDeleteTeam: boolean;
+  canRemoveTeamMembers: boolean;
+  canUpdateTeam: boolean;
+}
+
+export interface Role {
+  key: string;
+  name: string;
+  permissions: string[];
+  description: string;
+}
+
+export interface TeamInvitation {
+  id: number;
+  team_id: number;
+  email: string;
+  role: Nullable<string>;
+  created_at: DateTime;
+  updated_at: DateTime;
 }

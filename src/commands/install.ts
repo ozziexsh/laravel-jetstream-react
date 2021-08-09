@@ -1,4 +1,4 @@
-import { Command } from '@oclif/command';
+import { Command, flags } from '@oclif/command';
 import { execSync } from 'child_process';
 import * as path from 'path';
 import * as fse from 'fs-extra';
@@ -6,16 +6,16 @@ import * as fs from 'fs';
 import cli from 'cli-ux';
 
 export default class Install extends Command {
-  static description = 'describe the command here';
+  static description = 'Replaces vue with react in a fresh installation';
 
-  static examples = ['$ laravel-jetstream-react install'];
+  static examples = [
+    '$ laravel-jetstream-react install',
+    '$ laravel-jetstream-react install --teams',
+  ];
 
   static flags = {
-    // help: flags.help({char: 'h'}),
-    // // flag with a value (-n, --name=VALUE)
-    // name: flags.string({char: 'n', description: 'name to print'}),
-    // // flag with no value (-f, --force)
-    // force: flags.boolean({char: 'f'}),
+    help: flags.help({ char: 'h' }),
+    teams: flags.boolean({ default: false }),
   };
 
   static args = [];
@@ -71,7 +71,8 @@ export default class Install extends Command {
     arrowParens: 'avoid',
   };
 
-  async run() {
+  public async run() {
+    const { flags } = this.parse(Install);
     this.warn(
       'This installer assumes a FRESH install of Laravel Jetstream using the Inertia + Vue option.',
     );
@@ -133,6 +134,10 @@ export default class Install extends Command {
       recursive: true,
     });
     this.moveStub('resources/js', 'resources/js');
+
+    if (!flags.teams) {
+      this.removeTeams();
+    }
   }
 
   private moveStub(stubPath: string, localPath: string) {
@@ -144,5 +149,12 @@ export default class Install extends Command {
 
   private stubPath() {
     return path.join(__dirname, '..', 'stubs');
+  }
+
+  private removeTeams() {
+    fs.rmdirSync(path.join(process.cwd(), 'resources', 'js', 'Pages', 'Teams'));
+    fs.rmdirSync(
+      path.join(process.cwd(), 'resources', 'js', 'Domains', 'Teams'),
+    );
   }
 }

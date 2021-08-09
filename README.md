@@ -15,3 +15,11 @@ $ laravel new myapp --jet --stack=inertia
 $ cd myapp
 $ npx laravel-jetstream-react install
 ```
+
+It also supports teams
+
+```bash
+$ laravel new myapp --jet --stack=inertia --teams
+$ cd myapp
+$ npx laravel-jetstream-react install --teams
+```

@@ -152,9 +152,13 @@ export default class Install extends Command {
   }
 
   private removeTeams() {
-    fs.rmdirSync(path.join(process.cwd(), 'resources', 'js', 'Pages', 'Teams'));
+    fs.rmdirSync(
+      path.join(process.cwd(), 'resources', 'js', 'Pages', 'Teams'),
+      { recursive: true },
+    );
     fs.rmdirSync(
       path.join(process.cwd(), 'resources', 'js', 'Domains', 'Teams'),
+      { recursive: true },
     );
   }
 }

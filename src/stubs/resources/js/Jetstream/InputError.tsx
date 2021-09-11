@@ -10,7 +10,7 @@ export default function JetInputError({
   className,
   children,
 }: PropsWithChildren<Props>) {
-  if (!message || !children) {
+  if (!message && !children) {
     return null;
   }
   return (

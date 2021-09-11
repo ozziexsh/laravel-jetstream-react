@@ -174,7 +174,7 @@ export default function APITokenManager({
                       }}
                     />
                     <span className="ml-2 text-sm text-gray-600">
-                      {{ permission }}
+                      {permission}
                     </span>
                   </label>
                 </div>

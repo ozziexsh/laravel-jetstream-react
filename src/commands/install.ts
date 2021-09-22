@@ -89,15 +89,13 @@ export default class Install extends Command {
     fs.rmdirSync('node_modules', { recursive: true });
 
     this.log('Removing vue dependencies');
-    execSync(`npm remove ${this.oldDeps.join(' ')}`);
+    execSync(`npm uninstall -S ${this.oldDeps.join(' ')}`);
+    execSync(`npm uninstall -D ${this.oldDeps.join(' ')}`);
 
     this.log('Installing dev dependencies');
     execSync(`npm install -D ${this.devDeps.join(' ')}`);
 
     this.log('Installing dependencies');
-    execSync(`npm install -S ${this.deps.join(' ')}`);
-
-    this.log('Removing old dependencies');
     execSync(`npm install -S ${this.deps.join(' ')}`);
 
     this.log('Running install again');

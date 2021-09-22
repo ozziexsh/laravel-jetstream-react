@@ -27,7 +27,7 @@ export default function JetResponsiveNavLink({
     <div>
       {'as' in props && props.as === 'button' ? (
         <button className={classNames('w-full text-left', classes)}>
-          <slot></slot>
+          {children}
         </button>
       ) : (
         <InertiaLink href={href || ''} className={classes}>

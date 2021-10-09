@@ -11,11 +11,12 @@ import JetLabel from '@/Jetstream/Label';
 import JetValidationErrors from '@/Jetstream/ValidationErrors';
 
 interface Props {
+  canRegister: boolean;
   canResetPassword: boolean;
   status: string;
 }
 
-export default function Login({ canResetPassword, status }: Props) {
+export default function Login({ canRegister, canResetPassword, status }: Props) {
   const route = useRoute();
   const form = useForm({
     email: '',
@@ -93,12 +94,14 @@ export default function Login({ canResetPassword, status }: Props) {
           )}
 
           <div className="flex items-center justify-end">
-            <InertiaLink
-              href={route('register')}
-              className="underline text-sm text-gray-600 hover:text-gray-900"
-            >
-              Need an account?
-            </InertiaLink>
+            {canRegister ? (
+              <InertiaLink
+                href={route('register')}
+                className="underline text-sm text-gray-600 hover:text-gray-900"
+              >
+                Need an account?
+              </InertiaLink>
+            ) : null}
 
             <JetButton
               className={classNames('ml-4', { 'opacity-25': form.processing })}

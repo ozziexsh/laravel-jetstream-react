@@ -15,20 +15,17 @@ export default function TwoFactorAuthenticationForm() {
   const [disabling, setDisabling] = useState(false);
   const [qrCode, setQrCode] = useState<string | null>(null);
   const [recoveryCodes, setRecoveryCodes] = useState<string[]>([]);
-  const twoFactorEnabled = enabling && page.props?.user?.two_factor_enabled;
+  const twoFactorEnabled = page.props?.user?.two_factor_enabled;
 
   function enableTwoFactorAuthentication() {
     setEnabling(true);
 
-    Inertia.post(
-      '/user/two-factor-authentication',
-      {},
-      {
-        preserveScroll: true,
-        onSuccess: () => Promise.all([showQrCode(), showRecoveryCodes()]),
-        onFinish: () => setEnabling(false),
-      },
-    );
+    axios.post('/user/two-factor-authentication').then(() => {
+      Promise.all([showQrCode(), showRecoveryCodes()]).then(() => {
+        setEnabling(false);
+        Inertia.reload();
+      });
+    });
   }
 
   function showQrCode() {
@@ -52,9 +49,9 @@ export default function TwoFactorAuthenticationForm() {
   function disableTwoFactorAuthentication() {
     setDisabling(true);
 
-    Inertia.delete('/user/two-factor-authentication', {
-      preserveScroll: true,
-      onSuccess: () => setDisabling(false),
+    axios.delete('/user/two-factor-authentication').then(() => {
+      setDisabling(false);
+      Inertia.reload();
     });
   }
 

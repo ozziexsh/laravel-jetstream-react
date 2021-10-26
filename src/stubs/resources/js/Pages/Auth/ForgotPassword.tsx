@@ -9,7 +9,7 @@ import JetInput from '@/Jetstream/Input';
 import JetLabel from '@/Jetstream/Label';
 import JetValidationErrors from '@/Jetstream/ValidationErrors';
 
-export default function ForgotPassword() {
+export default function ForgotPassword(props) {
   const route = useRoute();
   const form = useForm({
     email: '',
@@ -30,8 +30,8 @@ export default function ForgotPassword() {
         choose a new one.
       </div>
 
-      {status && (
-        <div className="mb-4 font-medium text-sm text-green-600">{status}</div>
+      {props.status && (
+        <div className="mb-4 font-medium text-sm text-green-600">{props.status}</div>
       )}
 
       <JetValidationErrors className="mb-4" />

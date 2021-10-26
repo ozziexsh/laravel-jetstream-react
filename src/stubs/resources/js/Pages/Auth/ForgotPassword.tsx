@@ -9,7 +9,11 @@ import JetInput from '@/Jetstream/Input';
 import JetLabel from '@/Jetstream/Label';
 import JetValidationErrors from '@/Jetstream/ValidationErrors';
 
-export default function ForgotPassword() {
+interface Props {
+  status: string;
+}
+
+export default function ForgotPassword({ status }: Props) {
   const route = useRoute();
   const form = useForm({
     email: '',

@@ -29,13 +29,6 @@ export default function UpdateProfileInformationForm({ user }: Props) {
   const page = usePage<any>();
 
   function updateProfileInformation() {
-    if (photoRef.current) {
-      form.transform(data => ({
-        ...data,
-        photo: photoRef.current?.files?.[0] || null,
-      }));
-    }
-
     form.post(route('user-profile-information.update'), {
       errorBag: 'updateProfileInformation',
       preserveScroll: true,
@@ -50,7 +43,11 @@ export default function UpdateProfileInformationForm({ user }: Props) {
   function updatePhotoPreview() {
     const photo = photoRef.current?.files?.[0];
 
-    if (!photo) return;
+    if (!photo) {
+      return;
+    }
+
+    form.setData('photo', photo);
 
     const reader = new FileReader();
 
@@ -74,6 +71,7 @@ export default function UpdateProfileInformationForm({ user }: Props) {
   function clearPhotoFileInput() {
     if (photoRef.current?.value) {
       photoRef.current.value = '';
+      form.setData('photo', null);
     }
   }
 

@@ -56,7 +56,6 @@ export default function UpdateProfileInformationForm({ user }: Props) {
     };
 
     reader.readAsDataURL(photo);
-    form.setData('photo', photo);
   }
 
   function deletePhoto() {
@@ -72,6 +71,7 @@ export default function UpdateProfileInformationForm({ user }: Props) {
   function clearPhotoFileInput() {
     if (photoRef.current?.value) {
       photoRef.current.value = '';
+      form.setData('photo', null);
     }
   }
 

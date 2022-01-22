@@ -1,6 +1,6 @@
 {
   "name": "laravel-jetstream-react",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "author": "Ozzie Neher @ozziexsh",
   "bin": {
     "laravel-jetstream-react": "./bin/run"

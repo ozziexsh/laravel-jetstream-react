@@ -55,7 +55,9 @@ export default class Install extends Command {
   private oldDeps = [
     '@headlessui/vue',
     '@heroicons/vue',
+    '@inertiajs/inertia',
     '@inertiajs/inertia-vue3',
+    '@inertiajs/progress',
     '@vue/compiler-sfc',
     'vue',
     'vue-loader',
@@ -136,6 +138,8 @@ export default class Install extends Command {
     if (!flags.teams) {
       this.removeTeams();
     }
+
+    this.log('Installation complete. Enjoy :)');
   }
 
   private moveStub(stubPath: string, localPath: string) {

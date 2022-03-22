@@ -2,10 +2,6 @@
 
 Replaces the vue components in a **fresh** jetstream application with their react equivalents.
 
-You can view the full repo result here
-
-https://github.com/TravoShare/laravel-jetstream-react
-
 ## Usage
 
 Simply scaffold a new jetstream application using the vue stack, then run this cli tool.

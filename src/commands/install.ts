@@ -150,7 +150,7 @@ export default class Install extends Command {
   }
 
   private stubPath() {
-    return path.join(__dirname, '..', '..', 'stubs');
+    return path.join(__dirname, '..', 'stubs');
   }
 
   private depsForInstall(obj: { [key: string]: string }) {

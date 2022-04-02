@@ -1,65 +1,74 @@
 {
   "name": "laravel-jetstream-react",
-  "version": "0.2.9",
+  "version": "0.3.0",
+  "description": "Replace Vue with React in a Laravel Jetstream application",
   "author": "Ozzie Neher @ozziexsh",
   "bin": {
-    "laravel-jetstream-react": "./bin/run"
+    "laravel-jetstream-react": "bin/run"
   },
-  "bugs": "https://github.com/TravoShare/laravel-jetstream-react-installer/issues",
-  "dependencies": {
-    "@oclif/command": "^1.8.0",
-    "@oclif/config": "^1.17.0",
-    "@oclif/plugin-help": "^3.2.2",
-    "cli-ux": "^5.6.3",
-    "fs-extra": "^10.0.0",
-    "tslib": "^1.14.1"
-  },
-  "devDependencies": {
-    "@oclif/dev-cli": "^1.26.0",
-    "@types/fs-extra": "^9.0.12",
-    "@types/node": "^12.0.0",
-    "eslint": "^5.16.0",
-    "eslint-config-oclif": "^3.1.0",
-    "eslint-config-oclif-typescript": "^0.1.0",
-    "globby": "^10.0.2",
-    "ts-node": "^8.10.2",
-    "typescript": "^3.9.10"
-  },
-  "engines": {
-    "node": ">=12.0.0"
-  },
+  "homepage": "https://github.com/ozziexsh/laravel-jetstream-react",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "repository": "ozziexsh/laravel-jetstream-react",
   "files": [
     "/bin",
-    "/lib",
+    "/dist",
     "/npm-shrinkwrap.json",
     "/oclif.manifest.json"
   ],
-  "homepage": "https://github.com/TravoShare/laravel-jetstream-react-installer",
-  "keywords": [
-    "oclif"
-  ],
-  "license": "MIT",
-  "main": "lib/index.js",
+  "dependencies": {
+    "@oclif/core": "^1.6.4",
+    "@oclif/plugin-help": "^5.1.12",
+    "fs-extra": "^10.0.1"
+  },
+  "devDependencies": {
+    "@oclif/test": "^2.1.0",
+    "@types/fs-extra": "^9.0.13",
+    "@types/node": "^16.9.4",
+    "eslint": "^7.32.0",
+    "eslint-config-oclif": "^4.0.0",
+    "eslint-config-oclif-typescript": "^1.0.2",
+    "eslint-config-prettier": "^8.5.0",
+    "globby": "^11.1.0",
+    "oclif": "^2.6.3",
+    "prettier": "^2.6.2",
+    "shx": "^0.3.3",
+    "ts-node": "^10.2.1",
+    "tslib": "^2.3.1",
+    "typescript": "^4.4.3"
+  },
   "oclif": {
-    "commands": "./lib/commands",
     "bin": "laravel-jetstream-react",
+    "dirname": "laravel-jetstream-react",
+    "commands": "./dist/commands",
     "plugins": [
       "@oclif/plugin-help"
     ]
   },
-  "repository": "TravoShare/laravel-jetstream-react-installer",
   "scripts": {
-    "postpack": "rm -f oclif.manifest.json",
-    "posttest": "eslint . --ext .ts --config .eslintrc",
-    "prepack": "rm -rf lib && tsc -b && cp -R src/stubs lib/stubs && oclif-dev manifest && oclif-dev readme",
+    "build": "shx rm -rf dist && tsc -b && shx cp -R src/stubs dist/stubs",
+    "lint": "eslint . --ext .ts --config .eslintrc",
+    "postpack": "shx rm -f oclif.manifest.json",
+    "posttest": "npm run lint",
+    "prepack": "npm run build && oclif manifest && oclif readme",
     "test": "echo NO TESTS",
-    "version": "oclif-dev readme && git add README.md"
+    "version": "oclif readme && git add README.md"
   },
-  "types": "lib/index.d.ts",
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "bugs": "https://github.com/ozziexsh/laravel-jetstream-react/issues",
+  "keywords": [
+    "laravel",
+    "jetstream",
+    "react",
+    "vue"
+  ],
+  "types": "dist/index.d.ts",
   "prettier": {
     "semi": true,
     "singleQuote": true,
-    "tabs": false,
+    "useTabs": false,
     "tabWidth": 2,
     "trailingComma": "all",
     "printWidth": 80,

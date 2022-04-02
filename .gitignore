@@ -4,7 +4,7 @@
 /dist
 /lib
 /tmp
-/yarn.lock
 node_modules
-
+oclif.manifest.json
+.idea/
 .DS_Store

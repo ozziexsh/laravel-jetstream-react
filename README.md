@@ -73,7 +73,7 @@ function Component() {
 }
 ```
 
-### <JetConfirmsPassword />
+### \<JetConfirmsPassword />
 
 [Source](https://github.com/ozziexsh/laravel-jetstream-react/blob/main/src/stubs/resources/js/Jetstream/ConfirmsPassword.tsx)
 

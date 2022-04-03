@@ -10,7 +10,7 @@ Simply scaffold a new jetstream application using the vue stack, then run this c
 composer create-project laravel/laravel myapp
 cd myapp
 composer require laravel/jetstream
-php artisan jetstream:install inertia 
+php artisan jetstream:install inertia
 npx laravel-jetstream-react install
 ```
 

@@ -85,9 +85,9 @@ export default class Install extends Command {
       this.exit(0);
     }
 
-    this.log('Clearing node_modules');
     if (fs.existsSync(path.join(process.cwd(), 'node_modules'))) {
-      fs.rmSync('node_modules', { recursive: true });
+      this.log('Clearing node_modules');
+      fs.rmSync(path.join(process.cwd(), 'node_modules'), { recursive: true });
     }
 
     this.log('Removing vue dependencies');

@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '13 4 * * *'
 
 jobs:
   ensure_conversion_works:

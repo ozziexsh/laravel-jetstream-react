@@ -1,5 +1,4 @@
 import { Inertia } from '@inertiajs/inertia';
-// @ts-ignore
 import { InertiaLink, Head } from '@inertiajs/inertia-react';
 import classNames from 'classnames';
 import React, { PropsWithChildren, useState } from 'react';

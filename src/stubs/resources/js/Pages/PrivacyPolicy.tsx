@@ -1,6 +1,5 @@
 import React from 'react';
 import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo';
-// @ts-ignore
 import { Head } from '@inertiajs/inertia-react';
 
 interface Props {

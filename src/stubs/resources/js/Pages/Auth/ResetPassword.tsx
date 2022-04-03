@@ -1,4 +1,3 @@
-// @ts-ignore
 import { useForm, Head } from '@inertiajs/inertia-react';
 import classNames from 'classnames';
 import React from 'react';

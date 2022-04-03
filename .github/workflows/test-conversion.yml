@@ -27,6 +27,7 @@ jobs:
         env:
           FLAGS: ${{ matrix.flags }}
         run: |
+          npm install
           npm link
           composer create-project laravel/laravel myapp
           cd myapp

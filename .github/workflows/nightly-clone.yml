@@ -29,4 +29,4 @@ jobs:
           cd myapp
           composer require laravel/jetstream
           php artisan jetstream:install inertia $FLAGS
-          npx laravel-jetstream-react install $FLAGS
+          npx laravel-jetstream-react install --force $FLAGS

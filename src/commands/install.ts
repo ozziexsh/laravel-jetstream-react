@@ -10,10 +10,12 @@ export default class Install extends Command {
   static examples = [
     '$ laravel-jetstream-react install',
     '$ laravel-jetstream-react install --teams',
+    '$ laravel-jetstream-react install --force',
   ];
 
   static flags = {
     teams: Flags.boolean({ default: false }),
+    force: Flags.boolean({ default: false }),
   };
 
   static args = [];
@@ -73,16 +75,20 @@ export default class Install extends Command {
 
   public async run(): Promise<void> {
     const { flags } = await this.parse(Install);
+
     this.warn(
       'This installer assumes a FRESH install of Laravel Jetstream using the Inertia + Vue option.',
     );
-    this.warn(
-      'This will overwrite multiple files in this project, do you wish to continue?',
-    );
-    const confirm: string = await CliUx.ux.prompt('Continue? (y/n)');
-    if (confirm.toLowerCase() !== 'y' && confirm.toLowerCase() !== 'yes') {
-      this.log('Exiting');
-      this.exit(0);
+
+    if (!flags.force) {
+      this.warn(
+        'This will overwrite multiple files in this project, do you wish to continue?',
+      );
+      const confirm: string = await CliUx.ux.prompt('Continue? (y/n)');
+      if (confirm.toLowerCase() !== 'y' && confirm.toLowerCase() !== 'yes') {
+        this.log('Exiting');
+        this.exit(0);
+      }
     }
 
     if (fs.existsSync(path.join(process.cwd(), 'node_modules'))) {
@@ -140,6 +146,7 @@ export default class Install extends Command {
     }
 
     this.log('Installation complete. Enjoy :)');
+    this.exit(0);
   }
 
   private moveStub(stubPath: string, localPath: string) {

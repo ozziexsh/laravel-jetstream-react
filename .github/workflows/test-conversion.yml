@@ -28,6 +28,7 @@ jobs:
           FLAGS: ${{ matrix.flags }}
         run: |
           npm install
+          npm run build
           npm link
           composer create-project laravel/laravel myapp
           cd myapp

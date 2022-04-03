@@ -1,5 +1,5 @@
 import { Inertia } from '@inertiajs/inertia';
-import { usePage } from '@inertiajs/inertia-react';
+import { useForm, usePage } from '@inertiajs/inertia-react';
 import axios from 'axios';
 import classNames from 'classnames';
 import React, { useState } from 'react';
@@ -8,23 +8,68 @@ import JetButton from '@/Jetstream/Button';
 import JetConfirmsPassword from '@/Jetstream/ConfirmsPassword';
 import JetDangerButton from '@/Jetstream/DangerButton';
 import JetSecondaryButton from '@/Jetstream/SecondaryButton';
+import JetLabel from '@/Jetstream/Label';
+import JetInput from '@/Jetstream/Input';
+import JetInputError from '@/Jetstream/InputError';
 
-export default function TwoFactorAuthenticationForm() {
+interface Props {
+  requiresConfirmation: boolean;
+}
+
+export default function TwoFactorAuthenticationForm({
+  requiresConfirmation,
+}: Props) {
   const page = usePage<any>();
   const [enabling, setEnabling] = useState(false);
   const [disabling, setDisabling] = useState(false);
   const [qrCode, setQrCode] = useState<string | null>(null);
   const [recoveryCodes, setRecoveryCodes] = useState<string[]>([]);
-  const twoFactorEnabled = page.props?.user?.two_factor_enabled;
+  const [confirming, setConfirming] = useState(false);
+  const [setupKey, setSetupKey] = useState<string | null>(null);
+  const confirmationForm = useForm({
+    code: '',
+  });
+  const twoFactorEnabled = !enabling && page.props?.user?.two_factor_enabled;
 
   function enableTwoFactorAuthentication() {
     setEnabling(true);
 
-    axios.post('/user/two-factor-authentication').then(() => {
-      Promise.all([showQrCode(), showRecoveryCodes()]).then(() => {
-        setEnabling(false);
-        Inertia.reload();
-      });
+    Inertia.post(
+      '/user/two-factor-authentication',
+      {},
+      {
+        preserveScroll: true,
+        onSuccess() {
+          return Promise.all([
+            showQrCode(),
+            showSetupKey(),
+            showRecoveryCodes(),
+          ]);
+        },
+        onFinish() {
+          setEnabling(false);
+          setConfirming(requiresConfirmation);
+        },
+      },
+    );
+  }
+
+  function showSetupKey() {
+    return axios.get('/user/two-factor-secret-key').then(response => {
+      setSetupKey(response.data.secretKey);
+    });
+  }
+
+  function confirmTwoFactorAuthentication() {
+    confirmationForm.post('/user/confirmed-two-factor-authentication', {
+      preserveScroll: true,
+      preserveState: true,
+      errorBag: 'confirmTwoFactorAuthentication',
+      onSuccess: () => {
+        setConfirming(false);
+        setQrCode(null);
+        setSetupKey(null);
+      },
     });
   }
 
@@ -41,7 +86,7 @@ export default function TwoFactorAuthenticationForm() {
   }
 
   function regenerateRecoveryCodes() {
-    axios.post('/user/two-factor-recovery-codes').then(response => {
+    axios.post('/user/two-factor-recovery-codes').then(() => {
       showRecoveryCodes();
     });
   }
@@ -49,9 +94,12 @@ export default function TwoFactorAuthenticationForm() {
   function disableTwoFactorAuthentication() {
     setDisabling(true);
 
-    axios.delete('/user/two-factor-authentication').then(() => {
-      setDisabling(false);
-      Inertia.reload();
+    Inertia.delete('/user/two-factor-authentication', {
+      preserveScroll: true,
+      onSuccess() {
+        setDisabling(false);
+        setConfirming(false);
+      },
     });
   }
 
@@ -62,15 +110,27 @@ export default function TwoFactorAuthenticationForm() {
         'Add additional security to your account using two factor authentication.'
       }
     >
-      {twoFactorEnabled ? (
-        <h3 className="text-lg font-medium text-gray-900">
-          You have enabled two factor authentication.
-        </h3>
-      ) : (
-        <h3 className="text-lg font-medium text-gray-900">
-          You have not enabled two factor authentication.
-        </h3>
-      )}
+      {(() => {
+        if (twoFactorEnabled && !confirming) {
+          return (
+            <h3 className="text-lg font-medium text-gray-900">
+              You have enabled two factor authentication.
+            </h3>
+          );
+        }
+        if (confirming) {
+          return (
+            <h3 className="text-lg font-medium text-gray-900">
+              Finish enabling two factor authentication.
+            </h3>
+          );
+        }
+        return (
+          <h3 className="text-lg font-medium text-gray-900">
+            You have not enabled two factor authentication.
+          </h3>
+        );
+      })()}
 
       <div className="mt-3 max-w-xl text-sm text-gray-600">
         <p>
@@ -80,25 +140,71 @@ export default function TwoFactorAuthenticationForm() {
         </p>
       </div>
 
-      {twoFactorEnabled ? (
+      {twoFactorEnabled || confirming ? (
         <div>
           {qrCode ? (
             <div>
               <div className="mt-4 max-w-xl text-sm text-gray-600">
-                <p className="font-semibold">
-                  Two factor authentication is now enabled. Scan the following
-                  QR code using your phone's authenticator application.
-                </p>
+                {confirming ? (
+                  <p className="font-semibold">
+                    To finish enabling two factor authentication, scan the
+                    following QR code using your phone's authenticator
+                    application or enter the setup key and provide the generated
+                    OTP code.
+                  </p>
+                ) : (
+                  <p>
+                    Two factor authentication is now enabled. Scan the following
+                    QR code using your phone's authenticator application or
+                    enter the setup key.
+                  </p>
+                )}
               </div>
 
               <div
                 className="mt-4"
                 dangerouslySetInnerHTML={{ __html: qrCode || '' }}
               />
+
+              {setupKey && (
+                <div className="mt-4 max-w-xl text-sm text-gray-600">
+                  <p className="font-semibold">
+                    Setup Key:{' '}
+                    <span
+                      dangerouslySetInnerHTML={{ __html: setupKey || '' }}
+                    />
+                  </p>
+                </div>
+              )}
+
+              {confirming && (
+                <div className="mt-4">
+                  <JetLabel htmlFor="code" value="Code" />
+
+                  <JetInput
+                    id="code"
+                    type="text"
+                    name="code"
+                    className="block mt-1 w-1/2"
+                    inputMode="numeric"
+                    autoFocus={true}
+                    autoComplete="one-time-code"
+                    value={confirmationForm.data.code}
+                    onChange={e =>
+                      confirmationForm.setData('code', e.currentTarget.value)
+                    }
+                  />
+
+                  <JetInputError
+                    message={confirmationForm.errors.code}
+                    className="mt-2"
+                  />
+                </div>
+              )}
             </div>
           ) : null}
 
-          {recoveryCodes.length > 0 ? (
+          {recoveryCodes.length > 0 && !confirming ? (
             <div>
               <div className="mt-4 max-w-xl text-sm text-gray-600">
                 <p className="font-semibold">
@@ -119,30 +225,52 @@ export default function TwoFactorAuthenticationForm() {
       ) : null}
 
       <div className="mt-5">
-        {twoFactorEnabled ? (
+        {twoFactorEnabled || confirming ? (
           <div>
-            {recoveryCodes.length > 0 ? (
+            {confirming ? (
+              <JetConfirmsPassword onConfirm={confirmTwoFactorAuthentication}>
+                <JetButton
+                  className={classNames('mr-3', { 'opacity-25': enabling })}
+                  disabled={enabling}
+                >
+                  Confirm
+                </JetButton>
+              </JetConfirmsPassword>
+            ) : null}
+            {recoveryCodes.length > 0 && !confirming ? (
               <JetConfirmsPassword onConfirm={regenerateRecoveryCodes}>
                 <JetSecondaryButton className="mr-3">
                   Regenerate Recovery Codes
                 </JetSecondaryButton>
               </JetConfirmsPassword>
-            ) : (
+            ) : null}
+            {recoveryCodes.length === 0 && !confirming ? (
               <JetConfirmsPassword onConfirm={showRecoveryCodes}>
                 <JetSecondaryButton className="mr-3">
                   Show Recovery Codes
                 </JetSecondaryButton>
               </JetConfirmsPassword>
-            )}
+            ) : null}
 
-            <JetConfirmsPassword onConfirm={disableTwoFactorAuthentication}>
-              <JetDangerButton
-                className={classNames({ 'opacity-25': disabling })}
-                disabled={disabling}
-              >
-                Disable
-              </JetDangerButton>
-            </JetConfirmsPassword>
+            {confirming ? (
+              <JetConfirmsPassword onConfirm={disableTwoFactorAuthentication}>
+                <JetSecondaryButton
+                  className={classNames('mr-3', { 'opacity-25': disabling })}
+                  disabled={disabling}
+                >
+                  Cancel
+                </JetSecondaryButton>
+              </JetConfirmsPassword>
+            ) : (
+              <JetConfirmsPassword onConfirm={disableTwoFactorAuthentication}>
+                <JetDangerButton
+                  className={classNames({ 'opacity-25': disabling })}
+                  disabled={disabling}
+                >
+                  Disable
+                </JetDangerButton>
+              </JetConfirmsPassword>
+            )}
           </div>
         ) : (
           <div>

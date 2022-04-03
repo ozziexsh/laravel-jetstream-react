@@ -1,0 +1,38 @@
+on: push
+
+jobs:
+  ensure_conversion_works:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - name: Normal Conversion
+            flags: ''
+          - name: Teams Conversion
+            flags: '--teams'
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Test the conversion works
+        env:
+          FLAGS: ${{ matrix.flags }}
+        run: |
+          npm install
+          npm run build
+          npm link
+          composer create-project laravel/laravel myapp
+          cd myapp
+          composer require laravel/jetstream
+          php artisan jetstream:install inertia $FLAGS
+          npm link laravel-jetstream-react
+          npx laravel-jetstream-react install --force $FLAGS

@@ -7,15 +7,19 @@ Replaces the vue components in a **fresh** jetstream application with their reac
 Simply scaffold a new jetstream application using the vue stack, then run this cli tool.
 
 ```bash
-$ laravel new myapp --jet --stack=inertia
-$ cd myapp
-$ npx laravel-jetstream-react install
+composer create-project laravel/laravel myapp
+cd myapp
+composer require laravel/jetstream
+php artisan jetstream:install inertia 
+npx laravel-jetstream-react install
 ```
 
 It also supports teams
 
 ```bash
-$ laravel new myapp --jet --stack=inertia --teams
-$ cd myapp
-$ npx laravel-jetstream-react install --teams
+composer create-project laravel/laravel myapp
+cd myapp
+composer require laravel/jetstream
+php artisan jetstream:install inertia --teams
+npx laravel-jetstream-react install --teams
 ```

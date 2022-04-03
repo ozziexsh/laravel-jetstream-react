@@ -11,9 +11,13 @@ import { Session } from '@/types';
 
 interface Props {
   sessions: Session[];
+  confirmsTwoFactorAuthentication: boolean;
 }
 
-export default function Show({ sessions }: Props) {
+export default function Show({
+  sessions,
+  confirmsTwoFactorAuthentication,
+}: Props) {
   const page = useTypedPage();
 
   return (
@@ -45,7 +49,9 @@ export default function Show({ sessions }: Props) {
 
           {page.props.jetstream.canManageTwoFactorAuthentication ? (
             <div className="mt-10 sm:mt-0">
-              <TwoFactorAuthenticationForm />
+              <TwoFactorAuthenticationForm
+                requiresConfirmation={confirmsTwoFactorAuthentication}
+              />
 
               <JetSectionBorder />
             </div>

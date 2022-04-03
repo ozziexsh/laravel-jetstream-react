@@ -1,4 +1,6 @@
-on: push
+on:
+  schedule:
+    - cron: '0 0 * * *'
 
 jobs:
   ensure_conversion_works:

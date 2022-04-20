@@ -23,6 +23,10 @@ export default function JetModal({
     '2xl': 'sm:max-w-2xl',
   }[maxWidth];
 
+  if (typeof window === 'undefined') {
+    return null;
+  }
+
   return ReactDOM.createPortal(
     <Transition.Root show={isOpen} as={React.Fragment}>
       <Dialog

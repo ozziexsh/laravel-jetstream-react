@@ -11,10 +11,12 @@ export default class Install extends Command {
     '$ laravel-jetstream-react install',
     '$ laravel-jetstream-react install --teams',
     '$ laravel-jetstream-react install --force',
+    '$ laravel-jetstream-react install --ssr',
   ];
 
   static flags = {
     teams: Flags.boolean({ default: false }),
+    ssr: Flags.boolean({ default: false }),
     force: Flags.boolean({ default: false }),
   };
 
@@ -59,6 +61,7 @@ export default class Install extends Command {
     '@inertiajs/inertia-vue3',
     '@inertiajs/progress',
     '@vue/compiler-sfc',
+    '@vue/server-renderer',
     'vue',
     'vue-loader',
   ];
@@ -109,9 +112,13 @@ export default class Install extends Command {
     this.log('Running install again');
     execSync('npm install');
 
-    this.log('Replacing webpack.mix.js and webpack.config.js');
+    this.log('Replacing webpack.mix.js');
     this.moveStub('webpack.mix.js', 'webpack.mix.js');
-    this.moveStub('webpack.config.js', 'webpack.config.js');
+
+    if (flags.ssr) {
+      this.log('Replacing webpack.ssr.mix.js');
+      this.moveStub('webpack.ssr.mix.js', 'webpack.ssr.mix.js');
+    }
 
     this.log('Creating tsconfig.json');
     this.moveStub('tsconfig.json', 'tsconfig.json');
@@ -143,6 +150,10 @@ export default class Install extends Command {
 
     if (!flags.teams) {
       this.removeTeams();
+    }
+
+    if (!flags.ssr) {
+      fs.rmSync(path.join(process.cwd(), 'resources', 'js', 'ssr.tsx'));
     }
 
     this.log('Installation complete. Enjoy :)');

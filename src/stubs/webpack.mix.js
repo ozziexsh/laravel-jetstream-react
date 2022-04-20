@@ -19,7 +19,9 @@ mix
     require('tailwindcss'),
     require('autoprefixer'),
   ])
-  .webpackConfig(require('./webpack.config'));
+  .alias({
+    '@': 'resources/js',
+  });
 
 if (mix.inProduction()) {
   mix.version();

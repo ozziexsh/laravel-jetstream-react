@@ -12,6 +12,8 @@ jobs:
             flags: ''
           - name: Teams Conversion
             flags: '--teams'
+          - name: SSR Conversion
+            flags: '--ssr'
     steps:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2

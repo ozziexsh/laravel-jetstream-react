@@ -16,17 +16,17 @@ composer create-project laravel/laravel myapp
 cd myapp
 composer require laravel/jetstream
 php artisan jetstream:install inertia
-npx laravel-jetstream-react install
+npx laravel-jetstream-react@latest install
 ```
 
-It also supports teams
+It supports teams and/or SSR
 
 ```bash
 composer create-project laravel/laravel myapp
 cd myapp
 composer require laravel/jetstream
-php artisan jetstream:install inertia --teams
-npx laravel-jetstream-react install --teams
+php artisan jetstream:install inertia --teams --ssr
+npx laravel-jetstream-react@latest install --teams --ssr
 ```
 
 ## Components

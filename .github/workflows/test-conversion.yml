@@ -10,6 +10,8 @@ jobs:
             flags: ''
           - name: Teams Conversion
             flags: '--teams'
+          - name: SSR Conversion
+            flags: '--ssr'
     steps:
       - uses: actions/checkout@v3
 

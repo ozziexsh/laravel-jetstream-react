@@ -41,7 +41,7 @@ export default function JetDropdown({
         className="fixed inset-0 z-40"
         style={{ display: open ? 'block' : 'none' }}
         onClick={() => setOpen(false)}
-      ></div>
+      />
 
       <Transition
         show={open}
@@ -51,10 +51,11 @@ export default function JetDropdown({
         leave="transition ease-in duration-75"
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
+        className={'relative z-50'}
       >
         <div
           className={classNames(
-            'absolute z-50 mt-2 rounded-md shadow-lg',
+            'absolute mt-2 rounded-md shadow-lg',
             widthClass,
             alignmentClasses,
           )}

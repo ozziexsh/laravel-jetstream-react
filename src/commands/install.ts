@@ -23,22 +23,21 @@ export default class Install extends Command {
   static args = [];
 
   private devDeps = {
-    '@babel/preset-react': '^7.16.7',
     '@prettier/plugin-php': '^0.18.4',
-    '@tailwindcss/forms': '^0.5.0',
+    '@tailwindcss/forms': '^0.5.2',
     '@tailwindcss/typography': '^0.5.2',
     '@types/lodash': '^4.14.181',
     '@types/react': '^17.0.0',
     '@types/react-dom': '^17.0.0',
     '@types/ziggy-js': '^1.3.0',
-    autoprefixer: '^10.4.4',
-    'laravel-mix': '^6.0.43',
-    postcss: '^8.4.12',
-    'postcss-import': '^14.1.0',
+    '@vitejs/plugin-react': '^1.3.2',
+    autoprefixer: '^10.4.7',
+    'laravel-vite-plugin': '^0.2.4',
+    postcss: '^8.4.14',
     prettier: '^2.6.2',
-    tailwindcss: '^3.0.23',
-    'ts-loader': '^9.2.8',
+    tailwindcss: '^3.1.0',
     typescript: '^4.6.3',
+    vite: '^2.9.13',
   };
 
   private deps = {
@@ -55,15 +54,14 @@ export default class Install extends Command {
   };
 
   private oldDeps = [
-    '@headlessui/vue',
-    '@heroicons/vue',
     '@inertiajs/inertia',
     '@inertiajs/inertia-vue3',
     '@inertiajs/progress',
-    '@vue/compiler-sfc',
-    '@vue/server-renderer',
+    '@inertiajs/server',
+    '@vitejs/plugin-vue',
+    'laravel-vite-plugin',
+    'vite',
     'vue',
-    'vue-loader',
   ];
 
   private prettierConfig = {
@@ -112,12 +110,17 @@ export default class Install extends Command {
     this.log('Running install again');
     execSync('npm install');
 
-    this.log('Replacing webpack.mix.js');
-    this.moveStub('webpack.mix.js', 'webpack.mix.js');
+    this.log('Replacing vite.config.js');
+    fs.rmSync(path.join(process.cwd(), 'vite.config.js'));
+    if (flags.ssr) {
+      this.moveStub('vite.config.ssr.ts', 'vite.config.ts');
+    } else {
+      this.moveStub('vite.config.ts', 'vite.config.ts');
+    }
 
     if (flags.ssr) {
-      this.log('Replacing webpack.ssr.mix.js');
-      this.moveStub('webpack.ssr.mix.js', 'webpack.ssr.mix.js');
+      this.log('installing ssr dependency');
+      execSync('npm install @inertiajs/server@^0.1.0');
     }
 
     this.log('Creating tsconfig.json');
@@ -155,6 +158,12 @@ export default class Install extends Command {
     if (!flags.ssr) {
       fs.rmSync(path.join(process.cwd(), 'resources', 'js', 'ssr.tsx'));
     }
+
+    this.log('Replacing app.blade.php');
+    this.moveStub(
+      'resources/views/app.blade.php',
+      'resources/views/app.blade.php',
+    );
 
     this.log('Installation complete. Enjoy :)');
     this.exit(0);

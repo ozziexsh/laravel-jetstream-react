@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
     "jsx": "react",
     "rootDir": "./resources/js",
     "strict": true,
@@ -10,6 +11,7 @@
     "forceConsistentCasingInFileNames": true,
     "paths": {
       "@/*": ["./resources/js/*"]
-    }
+    },
+    "types": ["vite/client"]
   }
 }

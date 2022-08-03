@@ -7,6 +7,7 @@ export default defineConfig({
     laravel({
       input: 'resources/js/app.tsx',
       ssr: 'resources/js/ssr.tsx',
+      refresh: true,
     }),
     react(),
   ],
@@ -14,5 +15,8 @@ export default defineConfig({
     alias: {
       '@': '/resources/js',
     },
+  },
+  ssr: {
+    noExternal: ['@inertiajs/server'],
   },
 });

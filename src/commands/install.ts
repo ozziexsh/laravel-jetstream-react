@@ -30,14 +30,14 @@ export default class Install extends Command {
     '@types/react': '^17.0.0',
     '@types/react-dom': '^17.0.0',
     '@types/ziggy-js': '^1.3.0',
-    '@vitejs/plugin-react': '^1.3.2',
+    '@vitejs/plugin-react': '^2.0.0',
     autoprefixer: '^10.4.7',
-    'laravel-vite-plugin': '^0.2.4',
+    'laravel-vite-plugin': '^0.5.0',
     postcss: '^8.4.14',
     prettier: '^2.6.2',
     tailwindcss: '^3.1.0',
     typescript: '^4.6.3',
-    vite: '^2.9.13',
+    vite: '^3.0.0',
   };
 
   private deps = {

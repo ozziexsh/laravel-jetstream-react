@@ -96,3 +96,31 @@ function Component() {
   );
 }
 ```
+
+## Building Locally
+
+I had issues with using `npm link` so I have opted for these steps instead.
+
+First install dependencies and run the build script
+
+```shell
+npm install
+npm build
+```
+
+Then create a fresh laravel install with jetstream
+
+```shell
+composer create-project laravel/laravel myapp
+cd myapp
+composer require laravel/jetstream
+php artisan jetstream:install inertia
+```
+
+Finally run the locally built version of laravel-jetstream-react
+
+```shell
+# from inside the "myapp" directory
+# find wherever you cloned the laravel-jetstream-react repo
+../laravel-jetstream-react/bin/run install
+```

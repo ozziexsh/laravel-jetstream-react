@@ -6,7 +6,7 @@ import AuthenticationCard from '@/Components/AuthenticationCard';
 import Label from '@/Components/Label';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import ValidationErrors from '@/Components/ValidationErrors';
+import InputError from '@/Components/InputError';
 
 export default function TwoFactorChallenge() {
   const route = useRoute();
@@ -48,8 +48,6 @@ export default function TwoFactorChallenge() {
           : 'Please confirm access to your account by entering the authentication code provided by your authenticator application.'}
       </div>
 
-      <ValidationErrors className="mb-4" />
-
       <form onSubmit={onSubmit}>
         {recovery ? (
           <div>
@@ -65,6 +63,7 @@ export default function TwoFactorChallenge() {
               ref={recoveryCodeRef}
               autoComplete="one-time-code"
             />
+            <InputError className="mt-2" message={form.errors.recovery_code} />
           </div>
         ) : (
           <div>
@@ -80,6 +79,7 @@ export default function TwoFactorChallenge() {
               autoComplete="one-time-code"
               ref={codeRef}
             />
+            <InputError className="mt-2" message={form.errors.code} />
           </div>
         )}
 

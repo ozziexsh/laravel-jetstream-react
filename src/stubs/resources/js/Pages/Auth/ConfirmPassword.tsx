@@ -3,10 +3,10 @@ import classNames from 'classnames';
 import React from 'react';
 import useRoute from '@/Hooks/useRoute';
 import AuthenticationCard from '@/Components/AuthenticationCard';
+import InputError from '@/Components/InputError';
 import Label from '@/Components/Label';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import ValidationErrors from '@/Components/ValidationErrors';
 
 export default function ConfirmPassword() {
   const route = useRoute();
@@ -30,8 +30,6 @@ export default function ConfirmPassword() {
         before continuing.
       </div>
 
-      <ValidationErrors className="mb-4" />
-
       <form onSubmit={onSubmit}>
         <div>
           <Label htmlFor="password">Password</Label>
@@ -45,6 +43,7 @@ export default function ConfirmPassword() {
             autoComplete="current-password"
             autoFocus
           />
+          <InputError className="mt-2" message={form.errors.password} />
         </div>
 
         <div className="flex justify-end mt-4">

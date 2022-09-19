@@ -6,7 +6,7 @@ import AuthenticationCard from '@/Components/AuthenticationCard';
 import Label from '@/Components/Label';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import ValidationErrors from '@/Components/ValidationErrors';
+import InputError from '@/Components/InputError';
 
 interface Props {
   status: string;
@@ -37,8 +37,6 @@ export default function ForgotPassword({ status }: Props) {
         <div className="mb-4 font-medium text-sm text-green-600">{status}</div>
       )}
 
-      <ValidationErrors className="mb-4" />
-
       <form onSubmit={onSubmit}>
         <div>
           <Label htmlFor="email">Email</Label>
@@ -51,6 +49,7 @@ export default function ForgotPassword({ status }: Props) {
             required
             autoFocus
           />
+          <InputError className="mt-2" message={form.errors.email} />
         </div>
 
         <div className="flex items-center justify-end mt-4">

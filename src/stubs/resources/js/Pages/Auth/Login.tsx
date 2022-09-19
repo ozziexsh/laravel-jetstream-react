@@ -7,7 +7,7 @@ import Checkbox from '@/Components/Checkbox';
 import Label from '@/Components/Label';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import ValidationErrors from '@/Components/ValidationErrors';
+import InputError from '@/Components/InputError';
 
 interface Props {
   canResetPassword: boolean;
@@ -33,8 +33,6 @@ export default function Login({ canResetPassword, status }: Props) {
     <AuthenticationCard>
       <Head title="login" />
 
-      <ValidationErrors className="mb-4" />
-
       {status && (
         <div className="mb-4 font-medium text-sm text-green-600">{status}</div>
       )}
@@ -51,6 +49,7 @@ export default function Login({ canResetPassword, status }: Props) {
             required
             autoFocus
           />
+          <InputError className="mt-2" message={form.errors.email} />
         </div>
 
         <div className="mt-4">
@@ -64,6 +63,7 @@ export default function Login({ canResetPassword, status }: Props) {
             required
             autoComplete="current-password"
           />
+          <InputError className="mt-2" message={form.errors.password} />
         </div>
 
         <div className="mt-4">

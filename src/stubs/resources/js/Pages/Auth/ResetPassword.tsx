@@ -6,7 +6,7 @@ import AuthenticationCard from '@/Components/AuthenticationCard';
 import Label from '@/Components/Label';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import ValidationErrors from '@/Components/ValidationErrors';
+import InputError from '@/Components/InputError';
 
 interface Props {
   token: string;
@@ -33,8 +33,6 @@ export default function ResetPassword({ token, email }: Props) {
     <AuthenticationCard>
       <Head title="Reset Password" />
 
-      <ValidationErrors className="mb-4" />
-
       <form onSubmit={onSubmit}>
         <div>
           <Label htmlFor="email">Email</Label>
@@ -47,6 +45,7 @@ export default function ResetPassword({ token, email }: Props) {
             required
             autoFocus
           />
+          <InputError className="mt-2" message={form.errors.email} />
         </div>
 
         <div className="mt-4">
@@ -60,6 +59,7 @@ export default function ResetPassword({ token, email }: Props) {
             required
             autoComplete="new-password"
           />
+          <InputError className="mt-2" message={form.errors.password} />
         </div>
 
         <div className="mt-4">
@@ -75,6 +75,7 @@ export default function ResetPassword({ token, email }: Props) {
             required
             autoComplete="new-password"
           />
+          <InputError className="mt-2" message={form.errors.password_confirmation} />
         </div>
 
         <div className="flex items-center justify-end mt-4">

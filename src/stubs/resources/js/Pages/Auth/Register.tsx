@@ -8,7 +8,7 @@ import Checkbox from '@/Components/Checkbox';
 import Label from '@/Components/Label';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import ValidationErrors from '@/Components/ValidationErrors';
+import InputError from '@/Components/InputError';
 
 export default function Register() {
   const page = useTypedPage();
@@ -32,8 +32,6 @@ export default function Register() {
     <AuthenticationCard>
       <Head title="Register" />
 
-      <ValidationErrors className="mb-4" />
-
       <form onSubmit={onSubmit}>
         <div>
           <Label htmlFor="name">Name</Label>
@@ -47,6 +45,7 @@ export default function Register() {
             autoFocus
             autoComplete="name"
           />
+          <InputError className="mt-2" message={form.errors.name} />
         </div>
 
         <div className="mt-4">
@@ -59,6 +58,7 @@ export default function Register() {
             onChange={e => form.setData('email', e.currentTarget.value)}
             required
           />
+          <InputError className="mt-2" message={form.errors.email} />
         </div>
 
         <div className="mt-4">
@@ -72,6 +72,7 @@ export default function Register() {
             required
             autoComplete="new-password"
           />
+          <InputError className="mt-2" message={form.errors.password} />
         </div>
 
         <div className="mt-4">
@@ -87,6 +88,7 @@ export default function Register() {
             required
             autoComplete="new-password"
           />
+          <InputError className="mt-2" message={form.errors.password_confirmation} />
         </div>
 
         {page.props.jetstream.hasTermsAndPrivacyPolicyFeature && (
@@ -98,6 +100,7 @@ export default function Register() {
                   id="terms"
                   checked={form.data.terms}
                   onChange={e => form.setData('terms', e.currentTarget.checked)}
+                  required
                 />
 
                 <div className="ml-2">
@@ -119,6 +122,7 @@ export default function Register() {
                   </a>
                 </div>
               </div>
+              <InputError className="mt-2" message={form.errors.terms} />
             </Label>
           </div>
         )}

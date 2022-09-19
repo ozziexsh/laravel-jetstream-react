@@ -3,12 +3,12 @@ import classNames from 'classnames';
 import React from 'react';
 import useRoute from '@/Hooks/useRoute';
 import useTypedPage from '@/Hooks/useTypedPage';
-import JetAuthenticationCard from '@/Jetstream/AuthenticationCard';
-import JetButton from '@/Jetstream/Button';
-import JetCheckbox from '@/Jetstream/Checkbox';
-import JetInput from '@/Jetstream/Input';
-import JetLabel from '@/Jetstream/Label';
-import JetValidationErrors from '@/Jetstream/ValidationErrors';
+import AuthenticationCard from '@/Components/AuthenticationCard';
+import Checkbox from '@/Components/Checkbox';
+import Label from '@/Components/Label';
+import PrimaryButton from '@/Components/PrimaryButton';
+import TextInput from '@/Components/TextInput';
+import ValidationErrors from '@/Components/ValidationErrors';
 
 export default function Register() {
   const page = useTypedPage();
@@ -29,15 +29,15 @@ export default function Register() {
   }
 
   return (
-    <JetAuthenticationCard>
+    <AuthenticationCard>
       <Head title="Register" />
 
-      <JetValidationErrors className="mb-4" />
+      <ValidationErrors className="mb-4" />
 
       <form onSubmit={onSubmit}>
         <div>
-          <JetLabel htmlFor="name">Name</JetLabel>
-          <JetInput
+          <Label htmlFor="name">Name</Label>
+          <TextInput
             id="name"
             type="text"
             className="mt-1 block w-full"
@@ -50,8 +50,8 @@ export default function Register() {
         </div>
 
         <div className="mt-4">
-          <JetLabel htmlFor="email">Email</JetLabel>
-          <JetInput
+          <Label htmlFor="email">Email</Label>
+          <TextInput
             id="email"
             type="email"
             className="mt-1 block w-full"
@@ -62,8 +62,8 @@ export default function Register() {
         </div>
 
         <div className="mt-4">
-          <JetLabel htmlFor="password">Password</JetLabel>
-          <JetInput
+          <Label htmlFor="password">Password</Label>
+          <TextInput
             id="password"
             type="password"
             className="mt-1 block w-full"
@@ -75,8 +75,8 @@ export default function Register() {
         </div>
 
         <div className="mt-4">
-          <JetLabel htmlFor="password_confirmation">Confirm Password</JetLabel>
-          <JetInput
+          <Label htmlFor="password_confirmation">Confirm Password</Label>
+          <TextInput
             id="password_confirmation"
             type="password"
             className="mt-1 block w-full"
@@ -91,9 +91,9 @@ export default function Register() {
 
         {page.props.jetstream.hasTermsAndPrivacyPolicyFeature && (
           <div className="mt-4">
-            <JetLabel htmlFor="terms">
+            <Label htmlFor="terms">
               <div className="flex items-center">
-                <JetCheckbox
+                <Checkbox
                   name="terms"
                   id="terms"
                   checked={form.data.terms}
@@ -119,7 +119,7 @@ export default function Register() {
                   </a>
                 </div>
               </div>
-            </JetLabel>
+            </Label>
           </div>
         )}
 
@@ -131,14 +131,14 @@ export default function Register() {
             Already registered?
           </InertiaLink>
 
-          <JetButton
+          <PrimaryButton
             className={classNames('ml-4', { 'opacity-25': form.processing })}
             disabled={form.processing}
           >
             Register
-          </JetButton>
+          </PrimaryButton>
         </div>
       </form>
-    </JetAuthenticationCard>
+    </AuthenticationCard>
   );
 }

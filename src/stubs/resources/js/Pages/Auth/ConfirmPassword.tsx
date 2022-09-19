@@ -2,11 +2,11 @@ import { useForm, Head } from '@inertiajs/inertia-react';
 import classNames from 'classnames';
 import React from 'react';
 import useRoute from '@/Hooks/useRoute';
-import JetAuthenticationCard from '@/Jetstream/AuthenticationCard';
-import JetButton from '@/Jetstream/Button';
-import JetInput from '@/Jetstream/Input';
-import JetLabel from '@/Jetstream/Label';
-import JetValidationErrors from '@/Jetstream/ValidationErrors';
+import AuthenticationCard from '@/Components/AuthenticationCard';
+import Label from '@/Components/Label';
+import PrimaryButton from '@/Components/PrimaryButton';
+import TextInput from '@/Components/TextInput';
+import ValidationErrors from '@/Components/ValidationErrors';
 
 export default function ConfirmPassword() {
   const route = useRoute();
@@ -22,7 +22,7 @@ export default function ConfirmPassword() {
   }
 
   return (
-    <JetAuthenticationCard>
+    <AuthenticationCard>
       <Head title="Secure Area" />
 
       <div className="mb-4 text-sm text-gray-600">
@@ -30,12 +30,12 @@ export default function ConfirmPassword() {
         before continuing.
       </div>
 
-      <JetValidationErrors className="mb-4" />
+      <ValidationErrors className="mb-4" />
 
       <form onSubmit={onSubmit}>
         <div>
-          <JetLabel htmlFor="password">Password</JetLabel>
-          <JetInput
+          <Label htmlFor="password">Password</Label>
+          <TextInput
             id="password"
             type="password"
             className="mt-1 block w-full"
@@ -48,14 +48,14 @@ export default function ConfirmPassword() {
         </div>
 
         <div className="flex justify-end mt-4">
-          <JetButton
+          <PrimaryButton
             className={classNames('ml-4', { 'opacity-25': form.processing })}
             disabled={form.processing}
           >
             Confirm
-          </JetButton>
+          </PrimaryButton>
         </div>
       </form>
-    </JetAuthenticationCard>
+    </AuthenticationCard>
   );
 }

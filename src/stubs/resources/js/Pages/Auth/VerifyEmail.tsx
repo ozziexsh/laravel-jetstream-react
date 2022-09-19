@@ -2,8 +2,8 @@ import { InertiaLink, useForm, Head } from '@inertiajs/inertia-react';
 import classNames from 'classnames';
 import React from 'react';
 import useRoute from '@/Hooks/useRoute';
-import JetAuthenticationCard from '@/Jetstream/AuthenticationCard';
-import JetButton from '@/Jetstream/Button';
+import AuthenticationCard from '@/Components/AuthenticationCard';
+import PrimaryButton from '@/Components/PrimaryButton';
 
 interface Props {
   status: string;
@@ -20,7 +20,7 @@ export default function VerifyEmail({ status }: Props) {
   }
 
   return (
-    <JetAuthenticationCard>
+    <AuthenticationCard>
       <Head title="Email Verification" />
 
       <div className="mb-4 text-sm text-gray-600">
@@ -38,12 +38,12 @@ export default function VerifyEmail({ status }: Props) {
 
       <form onSubmit={onSubmit}>
         <div className="mt-4 flex items-center justify-between">
-          <JetButton
+          <PrimaryButton
             className={classNames({ 'opacity-25': form.processing })}
             disabled={form.processing}
           >
             Resend Verification Email
-          </JetButton>
+          </PrimaryButton>
 
           <InertiaLink
             href={route('logout')}
@@ -55,6 +55,6 @@ export default function VerifyEmail({ status }: Props) {
           </InertiaLink>
         </div>
       </form>
-    </JetAuthenticationCard>
+    </AuthenticationCard>
   );
 }

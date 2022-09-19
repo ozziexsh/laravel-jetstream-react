@@ -2,12 +2,12 @@ import { InertiaLink, useForm, Head } from '@inertiajs/inertia-react';
 import classNames from 'classnames';
 import React from 'react';
 import useRoute from '@/Hooks/useRoute';
-import JetAuthenticationCard from '@/Jetstream/AuthenticationCard';
-import JetButton from '@/Jetstream/Button';
-import JetCheckbox from '@/Jetstream/Checkbox';
-import JetInput from '@/Jetstream/Input';
-import JetLabel from '@/Jetstream/Label';
-import JetValidationErrors from '@/Jetstream/ValidationErrors';
+import AuthenticationCard from '@/Components/AuthenticationCard';
+import Checkbox from '@/Components/Checkbox';
+import Label from '@/Components/Label';
+import PrimaryButton from '@/Components/PrimaryButton';
+import TextInput from '@/Components/TextInput';
+import ValidationErrors from '@/Components/ValidationErrors';
 
 interface Props {
   canResetPassword: boolean;
@@ -30,10 +30,10 @@ export default function Login({ canResetPassword, status }: Props) {
   }
 
   return (
-    <JetAuthenticationCard>
+    <AuthenticationCard>
       <Head title="login" />
 
-      <JetValidationErrors className="mb-4" />
+      <ValidationErrors className="mb-4" />
 
       {status && (
         <div className="mb-4 font-medium text-sm text-green-600">{status}</div>
@@ -41,8 +41,8 @@ export default function Login({ canResetPassword, status }: Props) {
 
       <form onSubmit={onSubmit}>
         <div>
-          <JetLabel htmlFor="email">Email</JetLabel>
-          <JetInput
+          <Label htmlFor="email">Email</Label>
+          <TextInput
             id="email"
             type="email"
             className="mt-1 block w-full"
@@ -54,8 +54,8 @@ export default function Login({ canResetPassword, status }: Props) {
         </div>
 
         <div className="mt-4">
-          <JetLabel htmlFor="password">Password</JetLabel>
-          <JetInput
+          <Label htmlFor="password">Password</Label>
+          <TextInput
             id="password"
             type="password"
             className="mt-1 block w-full"
@@ -68,7 +68,7 @@ export default function Login({ canResetPassword, status }: Props) {
 
         <div className="mt-4">
           <label className="flex items-center">
-            <JetCheckbox
+            <Checkbox
               name="remember"
               checked={form.data.remember === 'on'}
               onChange={e =>
@@ -99,15 +99,15 @@ export default function Login({ canResetPassword, status }: Props) {
               Need an account?
             </InertiaLink>
 
-            <JetButton
+            <PrimaryButton
               className={classNames('ml-4', { 'opacity-25': form.processing })}
               disabled={form.processing}
             >
               Log in
-            </JetButton>
+            </PrimaryButton>
           </div>
         </div>
       </form>
-    </JetAuthenticationCard>
+    </AuthenticationCard>
   );
 }

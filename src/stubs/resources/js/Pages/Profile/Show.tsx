@@ -1,11 +1,11 @@
 import React from 'react';
-import DeleteUserForm from '@/Domains/Profile/DeleteUserForm';
-import LogoutOtherBrowserSessions from '@/Domains/Profile/LogoutOtherBrowserSessionsForm';
-import TwoFactorAuthenticationForm from '@/Domains/Profile/TwoFactorAuthenticationForm';
-import UpdatePasswordForm from '@/Domains/Profile/UpdatePasswordForm';
-import UpdateProfileInformationForm from '@/Domains/Profile/UpdateProfileInformationForm';
+import DeleteUserForm from '@/Pages/Profile/Partials/DeleteUserForm';
+import LogoutOtherBrowserSessions from '@/Pages/Profile/Partials/LogoutOtherBrowserSessionsForm';
+import TwoFactorAuthenticationForm from '@/Pages/Profile/Partials/TwoFactorAuthenticationForm';
+import UpdatePasswordForm from '@/Pages/Profile/Partials/UpdatePasswordForm';
+import UpdateProfileInformationForm from '@/Pages/Profile/Partials/UpdateProfileInformationForm';
 import useTypedPage from '@/Hooks/useTypedPage';
-import JetSectionBorder from '@/Jetstream/SectionBorder';
+import SectionBorder from '@/Components/SectionBorder';
 import AppLayout from '@/Layouts/AppLayout';
 import { Session } from '@/types';
 
@@ -35,7 +35,7 @@ export default function Show({
             <div>
               <UpdateProfileInformationForm user={page.props.user} />
 
-              <JetSectionBorder />
+              <SectionBorder />
             </div>
           ) : null}
 
@@ -43,7 +43,7 @@ export default function Show({
             <div className="mt-10 sm:mt-0">
               <UpdatePasswordForm />
 
-              <JetSectionBorder />
+              <SectionBorder />
             </div>
           ) : null}
 
@@ -53,7 +53,7 @@ export default function Show({
                 requiresConfirmation={confirmsTwoFactorAuthentication}
               />
 
-              <JetSectionBorder />
+              <SectionBorder />
             </div>
           ) : null}
 
@@ -63,7 +63,7 @@ export default function Show({
 
           {page.props.jetstream.hasAccountDeletionFeatures ? (
             <>
-              <JetSectionBorder />
+              <SectionBorder />
 
               <div className="mt-10 sm:mt-0">
                 <DeleteUserForm />

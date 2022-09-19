@@ -1,5 +1,5 @@
 import React from 'react';
-import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo';
+import AuthenticationCardLogo from '@/Components/AuthenticationCardLogo';
 import { Head } from '@inertiajs/inertia-react';
 
 interface Props {
@@ -14,7 +14,7 @@ export default function TermsOfService({ terms }: Props) {
       <div className="pt-4 bg-gray-100">
         <div className="min-h-screen flex flex-col items-center pt-6 sm:pt-0">
           <div>
-            <JetAuthenticationCardLogo />
+            <AuthenticationCardLogo />
           </div>
 
           <div

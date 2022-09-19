@@ -1,5 +1,5 @@
 import React from 'react';
-import APITokenManager from '@/Domains/API/APITokenManager';
+import APITokenManager from '@/Pages/API/Partials/APITokenManager';
 import AppLayout from '@/Layouts/AppLayout';
 import { ApiToken } from '@/types';
 

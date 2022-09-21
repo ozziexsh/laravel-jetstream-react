@@ -1,6 +1,6 @@
 {
   "name": "laravel-jetstream-react",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "description": "Replace Vue with React in a fresh Laravel Jetstream application",
   "author": "Ozzie Neher @ozziexsh",
   "bin": {

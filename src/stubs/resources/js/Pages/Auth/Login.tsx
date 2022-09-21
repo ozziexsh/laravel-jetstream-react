@@ -2,12 +2,12 @@ import { InertiaLink, useForm, Head } from '@inertiajs/inertia-react';
 import classNames from 'classnames';
 import React from 'react';
 import useRoute from '@/Hooks/useRoute';
-import JetAuthenticationCard from '@/Jetstream/AuthenticationCard';
-import JetButton from '@/Jetstream/Button';
-import JetCheckbox from '@/Jetstream/Checkbox';
-import JetInput from '@/Jetstream/Input';
-import JetLabel from '@/Jetstream/Label';
-import JetValidationErrors from '@/Jetstream/ValidationErrors';
+import AuthenticationCard from '@/Components/AuthenticationCard';
+import Checkbox from '@/Components/Checkbox';
+import InputLabel from '@/Components/InputLabel';
+import PrimaryButton from '@/Components/PrimaryButton';
+import TextInput from '@/Components/TextInput';
+import InputError from '@/Components/InputError';
 
 interface Props {
   canResetPassword: boolean;
@@ -30,10 +30,8 @@ export default function Login({ canResetPassword, status }: Props) {
   }
 
   return (
-    <JetAuthenticationCard>
+    <AuthenticationCard>
       <Head title="login" />
-
-      <JetValidationErrors className="mb-4" />
 
       {status && (
         <div className="mb-4 font-medium text-sm text-green-600">{status}</div>
@@ -41,8 +39,8 @@ export default function Login({ canResetPassword, status }: Props) {
 
       <form onSubmit={onSubmit}>
         <div>
-          <JetLabel htmlFor="email">Email</JetLabel>
-          <JetInput
+          <InputLabel htmlFor="email">Email</InputLabel>
+          <TextInput
             id="email"
             type="email"
             className="mt-1 block w-full"
@@ -51,11 +49,12 @@ export default function Login({ canResetPassword, status }: Props) {
             required
             autoFocus
           />
+          <InputError className="mt-2" message={form.errors.email} />
         </div>
 
         <div className="mt-4">
-          <JetLabel htmlFor="password">Password</JetLabel>
-          <JetInput
+          <InputLabel htmlFor="password">Password</InputLabel>
+          <TextInput
             id="password"
             type="password"
             className="mt-1 block w-full"
@@ -64,11 +63,12 @@ export default function Login({ canResetPassword, status }: Props) {
             required
             autoComplete="current-password"
           />
+          <InputError className="mt-2" message={form.errors.password} />
         </div>
 
         <div className="mt-4">
           <label className="flex items-center">
-            <JetCheckbox
+            <Checkbox
               name="remember"
               checked={form.data.remember === 'on'}
               onChange={e =>
@@ -99,15 +99,15 @@ export default function Login({ canResetPassword, status }: Props) {
               Need an account?
             </InertiaLink>
 
-            <JetButton
+            <PrimaryButton
               className={classNames('ml-4', { 'opacity-25': form.processing })}
               disabled={form.processing}
             >
               Log in
-            </JetButton>
+            </PrimaryButton>
           </div>
         </div>
       </form>
-    </JetAuthenticationCard>
+    </AuthenticationCard>
   );
 }

@@ -1,7 +1,7 @@
-import DeleteTeamForm from '@/Domains/Teams/DeleteTeamForm';
-import TeamMemberManager from '@/Domains/Teams/TeamMemberManager';
-import UpdateTeamNameForm from '@/Domains/Teams/UpdateTeamNameForm';
-import JetSectionBorder from '@/Jetstream/SectionBorder';
+import DeleteTeamForm from '@/Pages/Teams/Partials/DeleteTeamForm';
+import TeamMemberManager from '@/Pages/Teams/Partials/TeamMemberManager';
+import UpdateTeamNameForm from '@/Pages/Teams/Partials/UpdateTeamNameForm';
+import SectionBorder from '@/Components/SectionBorder';
 import AppLayout from '@/Layouts/AppLayout';
 import {
   JetstreamTeamPermissions,
@@ -52,7 +52,7 @@ export default function Show({ team, availableRoles, permissions }: Props) {
 
           {permissions.canDeleteTeam && !team.personal_team ? (
             <>
-              <JetSectionBorder />
+              <SectionBorder />
 
               <div className="mt-10 sm:mt-0">
                 <DeleteTeamForm team={team} />

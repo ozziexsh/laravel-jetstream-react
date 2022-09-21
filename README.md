@@ -73,7 +73,7 @@ function Component() {
 }
 ```
 
-### \<JetConfirmsPassword />
+### \<ConfirmsPassword />
 
 [Source](https://github.com/ozziexsh/laravel-jetstream-react/blob/main/src/stubs/resources/js/Jetstream/ConfirmsPassword.tsx)
 
@@ -82,7 +82,7 @@ Make the user confirm their password via a modal before calling a function
 If their password was confirmed recently (time configured via laravel config) it skips the modal and just calls the function
 
 ```javascript
-import JetConfirmsPassword from '@/Jetstream/ConfirmsPassword';
+import ConfirmsPassword from '@/Components/ConfirmsPassword';
 
 function Component() {
   function changeEmail() {
@@ -90,9 +90,9 @@ function Component() {
   }
 
   return (
-    <JetConfirmsPassword onConfirm={changeEmail}>
-      <JetButton>Update Email</JetButton>
-    </JetConfirmsPassword>  
+    <ConfirmsPassword onConfirm={changeEmail}>
+      <PrimaryButton>Update Email</PrimaryButton>
+    </ConfirmsPassword>
   );
 }
 ```

@@ -29,7 +29,7 @@ export default function Welcome({
           {page.props.user ? (
             <InertiaLink
               href={route('dashboard')}
-              className="text-sm text-gray-700 underline"
+              className="text-sm text-gray-700 dark:text-gray-500 underline"
             >
               Dashboard
             </InertiaLink>
@@ -37,7 +37,7 @@ export default function Welcome({
             <>
               <InertiaLink
                 href={route('login')}
-                className="text-sm text-gray-700 underline"
+                className="text-sm text-gray-700 dark:text-gray-500 underline"
               >
                 Log in
               </InertiaLink>
@@ -45,7 +45,7 @@ export default function Welcome({
               {canRegister ? (
                 <InertiaLink
                   href={route('register')}
-                  className="ml-4 text-sm text-gray-700 underline"
+                  className="ml-4 text-sm text-gray-700 dark:text-gray-500 underline"
                 >
                   Register
                 </InertiaLink>

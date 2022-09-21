@@ -2,11 +2,11 @@ import { useForm, Head } from '@inertiajs/inertia-react';
 import classNames from 'classnames';
 import React from 'react';
 import useRoute from '@/Hooks/useRoute';
-import JetAuthenticationCard from '@/Jetstream/AuthenticationCard';
-import JetButton from '@/Jetstream/Button';
-import JetInput from '@/Jetstream/Input';
-import JetLabel from '@/Jetstream/Label';
-import JetValidationErrors from '@/Jetstream/ValidationErrors';
+import AuthenticationCard from '@/Components/AuthenticationCard';
+import InputError from '@/Components/InputError';
+import InputLabel from '@/Components/InputLabel';
+import PrimaryButton from '@/Components/PrimaryButton';
+import TextInput from '@/Components/TextInput';
 
 export default function ConfirmPassword() {
   const route = useRoute();
@@ -22,7 +22,7 @@ export default function ConfirmPassword() {
   }
 
   return (
-    <JetAuthenticationCard>
+    <AuthenticationCard>
       <Head title="Secure Area" />
 
       <div className="mb-4 text-sm text-gray-600">
@@ -30,12 +30,10 @@ export default function ConfirmPassword() {
         before continuing.
       </div>
 
-      <JetValidationErrors className="mb-4" />
-
       <form onSubmit={onSubmit}>
         <div>
-          <JetLabel htmlFor="password">Password</JetLabel>
-          <JetInput
+          <InputLabel htmlFor="password">Password</InputLabel>
+          <TextInput
             id="password"
             type="password"
             className="mt-1 block w-full"
@@ -45,17 +43,18 @@ export default function ConfirmPassword() {
             autoComplete="current-password"
             autoFocus
           />
+          <InputError className="mt-2" message={form.errors.password} />
         </div>
 
         <div className="flex justify-end mt-4">
-          <JetButton
+          <PrimaryButton
             className={classNames('ml-4', { 'opacity-25': form.processing })}
             disabled={form.processing}
           >
             Confirm
-          </JetButton>
+          </PrimaryButton>
         </div>
       </form>
-    </JetAuthenticationCard>
+    </AuthenticationCard>
   );
 }

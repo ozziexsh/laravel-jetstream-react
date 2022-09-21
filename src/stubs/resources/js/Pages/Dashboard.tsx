@@ -1,5 +1,5 @@
 import React from 'react';
-import Welcome from '@/Jetstream/Welcome';
+import Welcome from '@/Components/Welcome';
 import AppLayout from '@/Layouts/AppLayout';
 
 export default function Dashboard() {

@@ -1,4 +1,4 @@
-import CreateTeamForm from '@/Domains/Teams/CreateTeamForm';
+import CreateTeamForm from '@/Pages/Teams/Partials/CreateTeamForm';
 import AppLayout from '@/Layouts/AppLayout';
 import React from 'react';
 

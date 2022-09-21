@@ -2,11 +2,11 @@ import { useForm, Head } from '@inertiajs/inertia-react';
 import classNames from 'classnames';
 import React, { useRef, useState } from 'react';
 import useRoute from '@/Hooks/useRoute';
-import JetAuthenticationCard from '@/Jetstream/AuthenticationCard';
-import JetButton from '@/Jetstream/Button';
-import JetInput from '@/Jetstream/Input';
-import JetLabel from '@/Jetstream/Label';
-import JetValidationErrors from '@/Jetstream/ValidationErrors';
+import AuthenticationCard from '@/Components/AuthenticationCard';
+import InputLabel from '@/Components/InputLabel';
+import PrimaryButton from '@/Components/PrimaryButton';
+import TextInput from '@/Components/TextInput';
+import InputError from '@/Components/InputError';
 
 export default function TwoFactorChallenge() {
   const route = useRoute();
@@ -39,7 +39,7 @@ export default function TwoFactorChallenge() {
   }
 
   return (
-    <JetAuthenticationCard>
+    <AuthenticationCard>
       <Head title="Two-Factor Confirmation" />
 
       <div className="mb-4 text-sm text-gray-600">
@@ -48,13 +48,11 @@ export default function TwoFactorChallenge() {
           : 'Please confirm access to your account by entering the authentication code provided by your authenticator application.'}
       </div>
 
-      <JetValidationErrors className="mb-4" />
-
       <form onSubmit={onSubmit}>
         {recovery ? (
           <div>
-            <JetLabel htmlFor="recovery_code">Recovery Code</JetLabel>
-            <JetInput
+            <InputLabel htmlFor="recovery_code">Recovery Code</InputLabel>
+            <TextInput
               id="recovery_code"
               type="text"
               className="mt-1 block w-full"
@@ -65,11 +63,12 @@ export default function TwoFactorChallenge() {
               ref={recoveryCodeRef}
               autoComplete="one-time-code"
             />
+            <InputError className="mt-2" message={form.errors.recovery_code} />
           </div>
         ) : (
           <div>
-            <JetLabel htmlFor="code">Code</JetLabel>
-            <JetInput
+            <InputLabel htmlFor="code">Code</InputLabel>
+            <TextInput
               id="code"
               type="text"
               inputMode="numeric"
@@ -80,6 +79,7 @@ export default function TwoFactorChallenge() {
               autoComplete="one-time-code"
               ref={codeRef}
             />
+            <InputError className="mt-2" message={form.errors.code} />
           </div>
         )}
 
@@ -92,14 +92,14 @@ export default function TwoFactorChallenge() {
             {recovery ? 'Use an authentication code' : 'Use a recovery code'}
           </button>
 
-          <JetButton
+          <PrimaryButton
             className={classNames('ml-4', { 'opacity-25': form.processing })}
             disabled={form.processing}
           >
             Log in
-          </JetButton>
+          </PrimaryButton>
         </div>
       </form>
-    </JetAuthenticationCard>
+    </AuthenticationCard>
   );
 }

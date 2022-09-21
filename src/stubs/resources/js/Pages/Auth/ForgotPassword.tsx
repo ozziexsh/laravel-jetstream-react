@@ -2,11 +2,11 @@ import { useForm, Head } from '@inertiajs/inertia-react';
 import classNames from 'classnames';
 import React from 'react';
 import useRoute from '@/Hooks/useRoute';
-import JetAuthenticationCard from '@/Jetstream/AuthenticationCard';
-import JetButton from '@/Jetstream/Button';
-import JetInput from '@/Jetstream/Input';
-import JetLabel from '@/Jetstream/Label';
-import JetValidationErrors from '@/Jetstream/ValidationErrors';
+import AuthenticationCard from '@/Components/AuthenticationCard';
+import InputLabel from '@/Components/InputLabel';
+import PrimaryButton from '@/Components/PrimaryButton';
+import TextInput from '@/Components/TextInput';
+import InputError from '@/Components/InputError';
 
 interface Props {
   status: string;
@@ -24,7 +24,7 @@ export default function ForgotPassword({ status }: Props) {
   }
 
   return (
-    <JetAuthenticationCard>
+    <AuthenticationCard>
       <Head title="Forgot Password" />
 
       <div className="mb-4 text-sm text-gray-600">
@@ -37,12 +37,10 @@ export default function ForgotPassword({ status }: Props) {
         <div className="mb-4 font-medium text-sm text-green-600">{status}</div>
       )}
 
-      <JetValidationErrors className="mb-4" />
-
       <form onSubmit={onSubmit}>
         <div>
-          <JetLabel htmlFor="email">Email</JetLabel>
-          <JetInput
+          <InputLabel htmlFor="email">Email</InputLabel>
+          <TextInput
             id="email"
             type="email"
             className="mt-1 block w-full"
@@ -51,17 +49,18 @@ export default function ForgotPassword({ status }: Props) {
             required
             autoFocus
           />
+          <InputError className="mt-2" message={form.errors.email} />
         </div>
 
         <div className="flex items-center justify-end mt-4">
-          <JetButton
+          <PrimaryButton
             className={classNames({ 'opacity-25': form.processing })}
             disabled={form.processing}
           >
             Email Password Reset Link
-          </JetButton>
+          </PrimaryButton>
         </div>
       </form>
-    </JetAuthenticationCard>
+    </AuthenticationCard>
   );
 }

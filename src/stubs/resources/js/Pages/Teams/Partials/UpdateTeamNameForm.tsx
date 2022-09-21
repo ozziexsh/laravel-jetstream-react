@@ -2,7 +2,7 @@ import useRoute from '@/Hooks/useRoute';
 import ActionMessage from '@/Components/ActionMessage';
 import FormSection from '@/Components/FormSection';
 import InputError from '@/Components/InputError';
-import Label from '@/Components/Label';
+import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { JetstreamTeamPermissions, Team, User } from '@/types';
@@ -54,7 +54,7 @@ export default function UpdateTeamNameForm({ team, permissions }: Props) {
     >
       {/* <!-- Team Owner Information --> */}
       <div className="col-span-6">
-        <Label value="Team Owner" />
+        <InputLabel value="Team Owner" />
 
         <div className="flex items-center mt-2">
           <img
@@ -72,7 +72,7 @@ export default function UpdateTeamNameForm({ team, permissions }: Props) {
 
       {/* <!-- Team Name --> */}
       <div className="col-span-6 sm:col-span-4">
-        <Label htmlFor="name" value="Team Name" />
+        <InputLabel htmlFor="name" value="Team Name" />
 
         <TextInput
           id="name"

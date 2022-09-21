@@ -152,7 +152,9 @@ export default class Install extends Command {
     this.moveStub('resources/js', 'resources/js');
 
     if (!flags.teams) {
-      this.removeTeams();
+      fs.rmSync(path.join(process.cwd(), 'resources', 'js', 'Pages', 'Teams'), {
+        recursive: true,
+      });
     }
 
     if (!flags.ssr) {
@@ -184,14 +186,5 @@ export default class Install extends Command {
     return Object.entries(obj)
       .map(([key, value]) => `"${key}@${value}"`)
       .join(' ');
-  }
-
-  private removeTeams() {
-    fs.rmSync(path.join(process.cwd(), 'resources', 'js', 'Pages', 'Teams'), {
-      recursive: true,
-    });
-    fs.rmSync(path.join(process.cwd(), 'resources', 'js', 'Domains', 'Teams'), {
-      recursive: true,
-    });
   }
 }

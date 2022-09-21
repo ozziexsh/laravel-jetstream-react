@@ -5,7 +5,7 @@ import useRoute from '@/Hooks/useRoute';
 import ActionMessage from '@/Components/ActionMessage';
 import FormSection from '@/Components/FormSection';
 import InputError from '@/Components/InputError';
-import Label from '@/Components/Label';
+import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 
@@ -61,7 +61,7 @@ export default function UpdatePasswordForm() {
       )}
     >
       <div className="col-span-6 sm:col-span-4">
-        <Label htmlFor="current_password">Current Password</Label>
+        <InputLabel htmlFor="current_password">Current Password</InputLabel>
         <TextInput
           id="current_password"
           type="password"
@@ -80,7 +80,7 @@ export default function UpdatePasswordForm() {
       </div>
 
       <div className="col-span-6 sm:col-span-4">
-        <Label htmlFor="password">New Password</Label>
+        <InputLabel htmlFor="password">New Password</InputLabel>
         <TextInput
           id="password"
           type="password"
@@ -94,7 +94,7 @@ export default function UpdatePasswordForm() {
       </div>
 
       <div className="col-span-6 sm:col-span-4">
-        <Label htmlFor="password_confirmation">Confirm Password</Label>
+        <InputLabel htmlFor="password_confirmation">Confirm Password</InputLabel>
         <TextInput
           id="password_confirmation"
           type="password"

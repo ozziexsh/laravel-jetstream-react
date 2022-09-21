@@ -4,7 +4,7 @@ import React from 'react';
 import useRoute from '@/Hooks/useRoute';
 import AuthenticationCard from '@/Components/AuthenticationCard';
 import InputError from '@/Components/InputError';
-import Label from '@/Components/Label';
+import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 
@@ -32,7 +32,7 @@ export default function ConfirmPassword() {
 
       <form onSubmit={onSubmit}>
         <div>
-          <Label htmlFor="password">Password</Label>
+          <InputLabel htmlFor="password">Password</InputLabel>
           <TextInput
             id="password"
             type="password"

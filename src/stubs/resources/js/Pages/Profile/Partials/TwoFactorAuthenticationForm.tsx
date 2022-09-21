@@ -7,7 +7,7 @@ import ActionSection from '@/Components/ActionSection';
 import ConfirmsPassword from '@/Components/ConfirmsPassword';
 import DangerButton from '@/Components/DangerButton';
 import InputError from '@/Components/InputError';
-import Label from '@/Components/Label';
+import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import SecondaryButton from '@/Components/SecondaryButton';
 import TextInput from '@/Components/TextInput';
@@ -179,7 +179,7 @@ export default function TwoFactorAuthenticationForm({
 
               {confirming && (
                 <div className="mt-4">
-                  <Label htmlFor="code" value="Code" />
+                  <InputLabel htmlFor="code" value="Code" />
 
                   <TextInput
                     id="code"

@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import React, { useRef, useState } from 'react';
 import useRoute from '@/Hooks/useRoute';
 import AuthenticationCard from '@/Components/AuthenticationCard';
-import Label from '@/Components/Label';
+import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
@@ -51,7 +51,7 @@ export default function TwoFactorChallenge() {
       <form onSubmit={onSubmit}>
         {recovery ? (
           <div>
-            <Label htmlFor="recovery_code">Recovery Code</Label>
+            <InputLabel htmlFor="recovery_code">Recovery Code</InputLabel>
             <TextInput
               id="recovery_code"
               type="text"
@@ -67,7 +67,7 @@ export default function TwoFactorChallenge() {
           </div>
         ) : (
           <div>
-            <Label htmlFor="code">Code</Label>
+            <InputLabel htmlFor="code">Code</InputLabel>
             <TextInput
               id="code"
               type="text"

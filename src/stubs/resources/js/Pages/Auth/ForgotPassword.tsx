@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import React from 'react';
 import useRoute from '@/Hooks/useRoute';
 import AuthenticationCard from '@/Components/AuthenticationCard';
-import Label from '@/Components/Label';
+import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
@@ -39,7 +39,7 @@ export default function ForgotPassword({ status }: Props) {
 
       <form onSubmit={onSubmit}>
         <div>
-          <Label htmlFor="email">Email</Label>
+          <InputLabel htmlFor="email">Email</InputLabel>
           <TextInput
             id="email"
             type="email"

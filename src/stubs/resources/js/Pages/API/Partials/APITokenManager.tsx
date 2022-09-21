@@ -10,7 +10,7 @@ import DangerButton from '@/Components/DangerButton';
 import DialogModal from '@/Components/DialogModal';
 import FormSection from '@/Components/FormSection';
 import InputError from '@/Components/InputError';
-import Label from '@/Components/Label';
+import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import SecondaryButton from '@/Components/SecondaryButton';
@@ -122,7 +122,7 @@ export default function APITokenManager({
       >
         {/* <!-- Token Name --> */}
         <div className="col-span-6 sm:col-span-4">
-          <Label htmlFor="name">Name</Label>
+          <InputLabel htmlFor="name">Name</InputLabel>
           <TextInput
             id="name"
             type="text"
@@ -142,7 +142,7 @@ export default function APITokenManager({
         {/* <!-- Token Permissions --> */}
         {availablePermissions.length > 0 && (
           <div className="col-span-6">
-            <Label htmlFor="permissions">Permissions</Label>
+            <InputLabel htmlFor="permissions">Permissions</InputLabel>
 
             <div className="mt-2 grid grid-cols-1 md:grid-cols-2 gap-4">
               {availablePermissions.map(permission => (

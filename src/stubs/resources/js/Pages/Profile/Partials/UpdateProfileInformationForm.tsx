@@ -6,7 +6,7 @@ import useRoute from '@/Hooks/useRoute';
 import ActionMessage from '@/Components/ActionMessage';
 import FormSection from '@/Components/FormSection';
 import InputError from '@/Components/InputError';
-import Label from '@/Components/Label';
+import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import SecondaryButton from '@/Components/SecondaryButton';
@@ -106,7 +106,7 @@ export default function UpdateProfileInformationForm({ user }: Props) {
             onChange={updatePhotoPreview}
           />
 
-          <Label htmlFor="photo" value="Photo" />
+          <InputLabel htmlFor="photo" value="Photo" />
 
           {photoPreview ? (
             // <!-- New Profile Photo Preview -->
@@ -156,7 +156,7 @@ export default function UpdateProfileInformationForm({ user }: Props) {
 
       {/* <!-- Name --> */}
       <div className="col-span-6 sm:col-span-4">
-        <Label htmlFor="name" value="Name" />
+        <InputLabel htmlFor="name" value="Name" />
         <TextInput
           id="name"
           type="text"
@@ -170,7 +170,7 @@ export default function UpdateProfileInformationForm({ user }: Props) {
 
       {/* <!-- Email --> */}
       <div className="col-span-6 sm:col-span-4">
-        <Label htmlFor="email" value="Email" />
+        <InputLabel htmlFor="email" value="Email" />
         <TextInput
           id="email"
           type="email"

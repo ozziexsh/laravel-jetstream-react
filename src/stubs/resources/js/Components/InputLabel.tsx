@@ -5,7 +5,7 @@ interface Props {
   htmlFor?: string;
 }
 
-export default function Label({
+export default function InputLabel({
   value,
   htmlFor,
   children,

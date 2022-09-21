@@ -7,7 +7,7 @@ import DangerButton from '@/Components/DangerButton';
 import DialogModal from '@/Components/DialogModal';
 import FormSection from '@/Components/FormSection';
 import InputError from '@/Components/InputError';
-import Label from '@/Components/Label';
+import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import SecondaryButton from '@/Components/SecondaryButton';
@@ -167,7 +167,7 @@ export default function TeamMemberManager({
 
             {/* <!-- Member Email --> */}
             <div className="col-span-6 sm:col-span-4">
-              <Label htmlFor="email" value="Email" />
+              <InputLabel htmlFor="email" value="Email" />
               <TextInput
                 id="email"
                 type="email"
@@ -186,7 +186,7 @@ export default function TeamMemberManager({
             {/* <!-- Role --> */}
             {availableRoles.length > 0 ? (
               <div className="col-span-6 lg:col-span-4">
-                <Label htmlFor="roles" value="Role" />
+                <InputLabel htmlFor="roles" value="Role" />
                 <InputError
                   message={addTeamMemberForm.errors.role}
                   className="mt-2"

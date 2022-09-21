@@ -5,7 +5,7 @@ import useRoute from '@/Hooks/useRoute';
 import useTypedPage from '@/Hooks/useTypedPage';
 import AuthenticationCard from '@/Components/AuthenticationCard';
 import Checkbox from '@/Components/Checkbox';
-import Label from '@/Components/Label';
+import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
@@ -34,7 +34,7 @@ export default function Register() {
 
       <form onSubmit={onSubmit}>
         <div>
-          <Label htmlFor="name">Name</Label>
+          <InputLabel htmlFor="name">Name</InputLabel>
           <TextInput
             id="name"
             type="text"
@@ -49,7 +49,7 @@ export default function Register() {
         </div>
 
         <div className="mt-4">
-          <Label htmlFor="email">Email</Label>
+          <InputLabel htmlFor="email">Email</InputLabel>
           <TextInput
             id="email"
             type="email"
@@ -62,7 +62,7 @@ export default function Register() {
         </div>
 
         <div className="mt-4">
-          <Label htmlFor="password">Password</Label>
+          <InputLabel htmlFor="password">Password</InputLabel>
           <TextInput
             id="password"
             type="password"
@@ -76,7 +76,7 @@ export default function Register() {
         </div>
 
         <div className="mt-4">
-          <Label htmlFor="password_confirmation">Confirm Password</Label>
+          <InputLabel htmlFor="password_confirmation">Confirm Password</InputLabel>
           <TextInput
             id="password_confirmation"
             type="password"
@@ -93,7 +93,7 @@ export default function Register() {
 
         {page.props.jetstream.hasTermsAndPrivacyPolicyFeature && (
           <div className="mt-4">
-            <Label htmlFor="terms">
+            <InputLabel htmlFor="terms">
               <div className="flex items-center">
                 <Checkbox
                   name="terms"
@@ -123,7 +123,7 @@ export default function Register() {
                 </div>
               </div>
               <InputError className="mt-2" message={form.errors.terms} />
-            </Label>
+            </InputLabel>
           </div>
         )}
 

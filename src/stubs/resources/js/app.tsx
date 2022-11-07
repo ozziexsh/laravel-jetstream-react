@@ -22,9 +22,7 @@ createInertiaApp({
     return render(
       <RouteContext.Provider value={(window as any).route}>
         <App {...props} />
-      </RouteContext.Provider>,
-      el,
-    );
+      </RouteContext.Provider>);
   },
 });
 

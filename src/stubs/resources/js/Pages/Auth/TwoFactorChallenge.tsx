@@ -20,7 +20,7 @@ export default function TwoFactorChallenge() {
 
   function toggleRecovery(e: React.FormEvent) {
     e.preventDefault();
-    setRecovery(true);
+    setRecovery(!recovery);
 
     setTimeout(() => {
       if (recovery) {

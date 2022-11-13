@@ -2,7 +2,7 @@ import './bootstrap';
 import '../css/app.css';
 
 import React from 'react';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { createInertiaApp } from '@inertiajs/inertia-react';
 import { InertiaProgress } from '@inertiajs/progress';
 import { RouteContext } from '@/Hooks/useRoute';
@@ -19,10 +19,12 @@ createInertiaApp({
       import.meta.glob('./Pages/**/*.tsx'),
     ),
   setup({ el, App, props }) {
-    return render(
+    const root = createRoot(el);
+    return root.render(
       <RouteContext.Provider value={(window as any).route}>
         <App {...props} />
-      </RouteContext.Provider>);
+      </RouteContext.Provider>,
+    );
   },
 });
 

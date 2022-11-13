@@ -20,10 +20,11 @@ export default function TwoFactorChallenge() {
 
   function toggleRecovery(e: React.FormEvent) {
     e.preventDefault();
-    setRecovery(!recovery);
+    const isRecovery = !recovery;
+    setRecovery(isRecovery);
 
     setTimeout(() => {
-      if (recovery) {
+      if (isRecovery) {
         recoveryCodeRef.current?.focus();
         form.setData('code', '');
       } else {

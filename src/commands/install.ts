@@ -27,8 +27,8 @@ export default class Install extends Command {
     '@tailwindcss/forms': '^0.5.2',
     '@tailwindcss/typography': '^0.5.2',
     '@types/lodash': '^4.14.181',
-    '@types/react': '^17.0.0',
-    '@types/react-dom': '^17.0.0',
+    '@types/react': '^18.0.25',
+    '@types/react-dom': '^18.0.8',
     '@types/ziggy-js': '^1.3.0',
     '@vitejs/plugin-react': '^2.0.0',
     autoprefixer: '^10.4.7',
@@ -42,14 +42,14 @@ export default class Install extends Command {
 
   private deps = {
     '@headlessui/react': '^1.5.0',
-    '@inertiajs/inertia': '^0.11.0',
-    '@inertiajs/inertia-react': '^0.8.0',
+    '@inertiajs/inertia': '^0.11.1',
+    '@inertiajs/inertia-react': '^0.8.1',
     '@inertiajs/progress': '^0.2.7',
     axios: '^0.26.1',
     classnames: '^2.3.1',
     lodash: '^4.17.21',
-    react: '^17.0.0',
-    'react-dom': '^17.0.0',
+    react: '^18.2.0',
+    'react-dom': '^18.2.0',
     'ziggy-js': '^1.4.5',
   };
 

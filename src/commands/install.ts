@@ -41,7 +41,7 @@ export default class Install extends Command {
   };
 
   private deps = {
-    '@headlessui/react': '^1.5.0',
+    '@headlessui/react': '^1.7.4',
     '@inertiajs/inertia': '^0.11.1',
     '@inertiajs/inertia-react': '^0.8.1',
     '@inertiajs/progress': '^0.2.7',

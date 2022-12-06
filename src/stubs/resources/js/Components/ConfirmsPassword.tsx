@@ -23,7 +23,7 @@ export default function ConfirmsPassword({
   children,
 }: PropsWithChildren<Props>) {
   const route = useRoute();
-  const [confirmingPassword, setConfirmingPassword] = useState(false);
+  const [confirmingPassword, setConfirmingPassword] = useState<boolean>(false);
   const [form, setForm] = useState({
     password: '',
     error: '',
@@ -73,7 +73,7 @@ export default function ConfirmsPassword({
     <span>
       <span onClick={startConfirmingPassword}>{children}</span>
 
-      <DialogModal isOpen={confirmingPassword} onClose={closeModal}>
+      <DialogModal show={confirmingPassword} onClose={closeModal}>
         <DialogModal.Content title={title}>
           {content}
 

@@ -331,9 +331,7 @@ export default function AppLayout({
 
                 {/* <!-- Authentication --> */}
                 <form method="POST" onSubmit={logout}>
-                  <ResponsiveNavLink as="button">
-                    Log Out
-                  </ResponsiveNavLink>
+                  <ResponsiveNavLink as="button">Log Out</ResponsiveNavLink>
                 </form>
 
                 {/* <!-- Team Management --> */}

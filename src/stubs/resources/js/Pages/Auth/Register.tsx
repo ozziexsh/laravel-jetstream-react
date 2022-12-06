@@ -76,7 +76,9 @@ export default function Register() {
         </div>
 
         <div className="mt-4">
-          <InputLabel htmlFor="password_confirmation">Confirm Password</InputLabel>
+          <InputLabel htmlFor="password_confirmation">
+            Confirm Password
+          </InputLabel>
           <TextInput
             id="password_confirmation"
             type="password"
@@ -88,7 +90,10 @@ export default function Register() {
             required
             autoComplete="new-password"
           />
-          <InputError className="mt-2" message={form.errors.password_confirmation} />
+          <InputError
+            className="mt-2"
+            message={form.errors.password_confirmation}
+          />
         </div>
 
         {page.props.jetstream.hasTermsAndPrivacyPolicyFeature && (

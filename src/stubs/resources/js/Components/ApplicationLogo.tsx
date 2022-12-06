@@ -1,10 +1,6 @@
 import React from 'react';
 
-export default function ApplicationLogo({
-  className,
-}: {
-  className?: string;
-}) {
+export default function ApplicationLogo({ className }: { className?: string }) {
   return (
     <svg
       viewBox="0 0 317 48"

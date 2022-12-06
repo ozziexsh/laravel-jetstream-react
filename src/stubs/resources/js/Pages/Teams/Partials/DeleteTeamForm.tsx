@@ -39,9 +39,7 @@ export default function DeleteTeamForm({ team }: Props) {
       </div>
 
       <div className="mt-5">
-        <DangerButton onClick={confirmTeamDeletion}>
-          Delete Team
-        </DangerButton>
+        <DangerButton onClick={confirmTeamDeletion}>Delete Team</DangerButton>
       </div>
 
       {/* <!-- Delete Team Confirmation Modal --> */}

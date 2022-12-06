@@ -73,10 +73,7 @@ export default function UpdatePasswordForm() {
           }
           autoComplete="current-password"
         />
-        <InputError
-          message={form.errors.current_password}
-          className="mt-2"
-        />
+        <InputError message={form.errors.current_password} className="mt-2" />
       </div>
 
       <div className="col-span-6 sm:col-span-4">
@@ -94,7 +91,9 @@ export default function UpdatePasswordForm() {
       </div>
 
       <div className="col-span-6 sm:col-span-4">
-        <InputLabel htmlFor="password_confirmation">Confirm Password</InputLabel>
+        <InputLabel htmlFor="password_confirmation">
+          Confirm Password
+        </InputLabel>
         <TextInput
           id="password_confirmation"
           type="password"

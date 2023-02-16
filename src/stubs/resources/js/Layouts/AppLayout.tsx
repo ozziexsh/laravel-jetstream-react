@@ -88,7 +88,7 @@ export default function AppLayout({
                             type="button"
                             className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition"
                           >
-                            {page.props.user.current_team?.name}
+                            {page.props.auth.user.current_team?.name}
 
                             <svg
                               className="ml-2 -mr-0.5 h-4 w-4"
@@ -117,7 +117,7 @@ export default function AppLayout({
                             {/* <!-- Team Settings --> */}
                             <DropdownLink
                               href={route('teams.show', [
-                                page.props.user.current_team!,
+                                page.props.auth.user.current_team!,
                               ])}
                             >
                               Team Settings
@@ -136,7 +136,7 @@ export default function AppLayout({
                               Switch Teams
                             </div>
 
-                            {page.props.user.all_teams?.map(team => (
+                            {page.props.auth.user.all_teams?.map(team => (
                               <form
                                 onSubmit={e => switchToTeam(e, team)}
                                 key={team.id}
@@ -144,7 +144,7 @@ export default function AppLayout({
                                 <DropdownLink as="button">
                                   <div className="flex items-center">
                                     {team.id ==
-                                      page.props.user.current_team_id && (
+                                      page.props.auth.user.current_team_id && (
                                       <svg
                                         className="mr-2 h-5 w-5 text-green-400"
                                         fill="none"
@@ -179,8 +179,8 @@ export default function AppLayout({
                         <button className="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
                           <img
                             className="h-8 w-8 rounded-full object-cover"
-                            src={page.props.user.profile_photo_url}
-                            alt={page.props.user.name}
+                            src={page.props.auth.user.profile_photo_url}
+                            alt={page.props.auth.user.name}
                           />
                         </button>
                       ) : (
@@ -189,7 +189,7 @@ export default function AppLayout({
                             type="button"
                             className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition"
                           >
-                            {page.props.user.name}
+                            {page.props.auth.user.name}
 
                             <svg
                               className="ml-2 -mr-0.5 h-4 w-4"
@@ -296,18 +296,18 @@ export default function AppLayout({
                   <div className="flex-shrink-0 mr-3">
                     <img
                       className="h-10 w-10 rounded-full object-cover"
-                      src={page.props.user.profile_photo_url}
-                      alt={page.props.user.name}
+                      src={page.props.auth.user.profile_photo_url}
+                      alt={page.props.auth.user.name}
                     />
                   </div>
                 ) : null}
 
                 <div>
                   <div className="font-medium text-base text-gray-800">
-                    {page.props.user.name}
+                    {page.props.auth.user.name}
                   </div>
                   <div className="font-medium text-sm text-gray-500">
-                    {page.props.user.email}
+                    {page.props.auth.user.email}
                   </div>
                 </div>
               </div>
@@ -348,7 +348,7 @@ export default function AppLayout({
                     {/* <!-- Team Settings --> */}
                     <ResponsiveNavLink
                       href={route('teams.show', [
-                        page.props.user.current_team!,
+                        page.props.auth.user.current_team!,
                       ])}
                       active={route().current('teams.show')}
                     >
@@ -370,11 +370,11 @@ export default function AppLayout({
                     <div className="block px-4 py-2 text-xs text-gray-400">
                       Switch Teams
                     </div>
-                    {page.props.user?.all_teams?.map(team => (
+                    {page.props.auth.user?.all_teams?.map(team => (
                       <form onSubmit={e => switchToTeam(e, team)} key={team.id}>
                         <ResponsiveNavLink as="button">
                           <div className="flex items-center">
-                            {team.id == page.props.user.current_team_id && (
+                            {team.id == page.props.auth.user.current_team_id && (
                               <svg
                                 className="mr-2 h-5 w-5 text-green-400"
                                 fill="none"

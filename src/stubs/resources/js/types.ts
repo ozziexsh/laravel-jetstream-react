@@ -23,6 +23,13 @@ export interface User {
   updated_at: DateTime;
 }
 
+export interface Auth {
+  user: User & {
+    all_teams?: Team[];
+    current_team?: Team;
+  }
+}
+
 export type InertiaSharedProps<T = {}> = T & {
   jetstream: {
     canCreateTeams: boolean;
@@ -36,10 +43,7 @@ export type InertiaSharedProps<T = {}> = T & {
     hasTermsAndPrivacyPolicyFeature: boolean;
     managesProfilePhotos: boolean;
   };
-  user: User & {
-    all_teams?: Team[];
-    current_team?: Team;
-  };
+  auth: Auth;
   errorBags: any;
   errors: any;
 };

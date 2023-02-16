@@ -98,7 +98,7 @@ export default function TeamMemberManager({
 
   function leaveTeam() {
     leaveTeamForm.delete(
-      route('team-members.destroy', [team, page.props.user]),
+      route('team-members.destroy', [team, page.props.auth.user]),
     );
   }
 
@@ -340,7 +340,7 @@ export default function TeamMemberManager({
                     ) : null}
 
                     {/* <!-- Leave Team --> */}
-                    {page.props.user.id === user.id ? (
+                    {page.props.auth.user.id === user.id ? (
                       <button
                         className="cursor-pointer ml-6 text-sm text-red-500"
                         onClick={confirmLeavingTeam}

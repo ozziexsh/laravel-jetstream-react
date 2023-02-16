@@ -29,7 +29,7 @@ export default function TwoFactorAuthenticationForm({
   const confirmationForm = useForm({
     code: '',
   });
-  const twoFactorEnabled = !enabling && page.props?.user?.two_factor_enabled;
+  const twoFactorEnabled = !enabling && page.props?.auth?.user?.two_factor_enabled;
 
   function enableTwoFactorAuthentication() {
     setEnabling(true);

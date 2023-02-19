@@ -79,6 +79,7 @@ export default function ConfirmsPassword({
 
           <div className="mt-4">
             <TextInput
+              ref={passwordRef}
               type="password"
               className="mt-1 block w-3/4"
               placeholder="Password"

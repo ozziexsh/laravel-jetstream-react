@@ -19,14 +19,14 @@ php artisan jetstream:install inertia
 npx laravel-jetstream-react@latest install
 ```
 
-It supports teams and/or SSR
+It supports teams, SSR, and dark mode
 
 ```bash
 composer create-project laravel/laravel myapp
 cd myapp
 composer require laravel/jetstream
-php artisan jetstream:install inertia --teams --ssr
-npx laravel-jetstream-react@latest install --teams --ssr
+php artisan jetstream:install inertia --teams --ssr --dark
+npx laravel-jetstream-react@latest install --teams --ssr --dark
 ```
 
 ## Components

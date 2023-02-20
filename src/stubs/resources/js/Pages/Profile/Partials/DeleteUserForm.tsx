@@ -1,4 +1,4 @@
-import { useForm } from '@inertiajs/inertia-react';
+import { useForm } from '@inertiajs/react';
 import classNames from 'classnames';
 import React, { useRef, useState } from 'react';
 import useRoute from '@/Hooks/useRoute';
@@ -42,7 +42,7 @@ export default function DeleteUserForm() {
       title={'Delete Account'}
       description={'Permanently delete your account.'}
     >
-      <div className="max-w-xl text-sm text-gray-600">
+      <div className="max-w-xl text-sm text-gray-600 dark:text-gray-400">
         Once your account is deleted, all of its resources and data will be
         permanently deleted. Before deleting your account, please download any
         data or information that you wish to retain.

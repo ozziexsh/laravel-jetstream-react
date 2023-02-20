@@ -6,7 +6,7 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { JetstreamTeamPermissions, Team, User } from '@/types';
-import { useForm } from '@inertiajs/inertia-react';
+import { useForm } from '@inertiajs/react';
 import classNames from 'classnames';
 import React from 'react';
 
@@ -64,8 +64,12 @@ export default function UpdateTeamNameForm({ team, permissions }: Props) {
           />
 
           <div className="ml-4 leading-tight">
-            <div>{team.owner.name}</div>
-            <div className="text-gray-700 text-sm">{team.owner.email}</div>
+            <div className="text-gray-900 dark:text-white">
+              {team.owner.name}
+            </div>
+            <div className="text-gray-700 dark:text-gray-300 text-sm">
+              {team.owner.email}
+            </div>
           </div>
         </div>
       </div>

@@ -1,11 +1,10 @@
-import { Page } from '@inertiajs/inertia';
-import { usePage } from '@inertiajs/inertia-react';
-import classNames from 'classnames';
 import React, { useState } from 'react';
+import classNames from 'classnames';
+import useTypedPage from '@/Hooks/useTypedPage';
 
 export default function Banner() {
   const [show, setShow] = useState(true);
-  const { props } = usePage<Page<{ jetstream: any }>>();
+  const { props } = useTypedPage();
   const style = props.jetstream.flash?.bannerStyle || 'success';
   const message = props.jetstream.flash?.banner || '';
 

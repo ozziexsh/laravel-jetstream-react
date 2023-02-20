@@ -1,4 +1,4 @@
-import { useForm, Head } from '@inertiajs/inertia-react';
+import { useForm, Head } from '@inertiajs/react';
 import classNames from 'classnames';
 import React from 'react';
 import useRoute from '@/Hooks/useRoute';
@@ -63,7 +63,9 @@ export default function ResetPassword({ token, email }: Props) {
         </div>
 
         <div className="mt-4">
-          <InputLabel htmlFor="password_confirmation">Confirm Password</InputLabel>
+          <InputLabel htmlFor="password_confirmation">
+            Confirm Password
+          </InputLabel>
           <TextInput
             id="password_confirmation"
             type="password"
@@ -75,7 +77,10 @@ export default function ResetPassword({ token, email }: Props) {
             required
             autoComplete="new-password"
           />
-          <InputError className="mt-2" message={form.errors.password_confirmation} />
+          <InputError
+            className="mt-2"
+            message={form.errors.password_confirmation}
+          />
         </div>
 
         <div className="flex items-center justify-end mt-4">

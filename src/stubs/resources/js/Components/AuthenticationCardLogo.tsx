@@ -1,9 +1,9 @@
-import { InertiaLink } from '@inertiajs/inertia-react';
+import { Link } from '@inertiajs/react';
 import React from 'react';
 
 export default function AuthenticationCardLogo() {
   return (
-    <InertiaLink href="/">
+    <Link href="/">
       <svg
         className="w-16 h-16"
         viewBox="0 0 48 48"
@@ -19,6 +19,6 @@ export default function AuthenticationCardLogo() {
           fill="#6875F5"
         />
       </svg>
-    </InertiaLink>
+    </Link>
   );
 }

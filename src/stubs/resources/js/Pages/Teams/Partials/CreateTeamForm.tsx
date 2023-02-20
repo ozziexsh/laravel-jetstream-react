@@ -1,4 +1,4 @@
-import { useForm } from '@inertiajs/inertia-react';
+import { useForm } from '@inertiajs/react';
 import React from 'react';
 import useRoute from '@/Hooks/useRoute';
 import useTypedPage from '@/Hooks/useTypedPage';
@@ -50,13 +50,17 @@ export default function CreateTeamForm() {
         <div className="flex items-center mt-2">
           <img
             className="w-12 h-12 rounded-full object-cover"
-            src={page.props.user.profile_photo_url}
-            alt={page.props.user.name}
+            src={page.props.auth.user?.profile_photo_url}
+            alt={page.props.auth.user?.name}
           />
 
           <div className="ml-4 leading-tight">
-            <div>{page.props.user.name}</div>
-            <div className="text-gray-700 text-sm">{page.props.user.email}</div>
+            <div className="text-gray-900 dark:text-white">
+              {page.props.auth.user?.name}
+            </div>
+            <div className="text-gray-700 dark:text-gray-300 text-sm">
+              {page.props.auth.user?.email}
+            </div>
           </div>
         </div>
       </div>

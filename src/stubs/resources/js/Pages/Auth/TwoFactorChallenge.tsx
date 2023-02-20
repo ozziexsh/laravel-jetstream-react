@@ -1,4 +1,4 @@
-import { useForm, Head } from '@inertiajs/inertia-react';
+import { useForm, Head } from '@inertiajs/react';
 import classNames from 'classnames';
 import React, { useRef, useState } from 'react';
 import useRoute from '@/Hooks/useRoute';
@@ -43,7 +43,7 @@ export default function TwoFactorChallenge() {
     <AuthenticationCard>
       <Head title="Two-Factor Confirmation" />
 
-      <div className="mb-4 text-sm text-gray-600">
+      <div className="mb-4 text-sm text-gray-600 dark:text-gray-400">
         {recovery
           ? 'Please confirm access to your account by entering one of your emergency recovery codes.'
           : 'Please confirm access to your account by entering the authentication code provided by your authenticator application.'}
@@ -87,7 +87,7 @@ export default function TwoFactorChallenge() {
         <div className="flex items-center justify-end mt-4">
           <button
             type="button"
-            className="text-sm text-gray-600 hover:text-gray-900 underline cursor-pointer"
+            className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 underline cursor-pointer"
             onClick={toggleRecovery}
           >
             {recovery ? 'Use an authentication code' : 'Use a recovery code'}

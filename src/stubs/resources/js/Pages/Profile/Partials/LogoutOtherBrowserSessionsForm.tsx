@@ -1,4 +1,4 @@
-import { useForm } from '@inertiajs/inertia-react';
+import { useForm } from '@inertiajs/react';
 import classNames from 'classnames';
 import React, { useRef, useState } from 'react';
 import useRoute from '@/Hooks/useRoute';
@@ -51,7 +51,7 @@ export default function LogoutOtherBrowserSessions({ sessions }: Props) {
         'Manage and log out your active sessions on other browsers and devices.'
       }
     >
-      <div className="max-w-xl text-sm text-gray-600">
+      <div className="max-w-xl text-sm text-gray-600 dark:text-gray-400">
         If necessary, you may log out of all of your other browser sessions
         across all of your devices. Some of your recent sessions are listed
         below; however, this list may not be exhaustive. If you feel your
@@ -95,7 +95,7 @@ export default function LogoutOtherBrowserSessions({ sessions }: Props) {
               </div>
 
               <div className="ml-3">
-                <div className="text-sm text-gray-600">
+                <div className="text-sm text-gray-600 dark:text-gray-400">
                   {session.agent.platform} - {session.agent.browser}
                 </div>
 

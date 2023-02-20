@@ -1,4 +1,4 @@
-import { InertiaLink, useForm, Head } from '@inertiajs/inertia-react';
+import { Link, useForm, Head } from '@inertiajs/react';
 import classNames from 'classnames';
 import React from 'react';
 import useRoute from '@/Hooks/useRoute';
@@ -76,7 +76,9 @@ export default function Register() {
         </div>
 
         <div className="mt-4">
-          <InputLabel htmlFor="password_confirmation">Confirm Password</InputLabel>
+          <InputLabel htmlFor="password_confirmation">
+            Confirm Password
+          </InputLabel>
           <TextInput
             id="password_confirmation"
             type="password"
@@ -88,7 +90,10 @@ export default function Register() {
             required
             autoComplete="new-password"
           />
-          <InputError className="mt-2" message={form.errors.password_confirmation} />
+          <InputError
+            className="mt-2"
+            message={form.errors.password_confirmation}
+          />
         </div>
 
         {page.props.jetstream.hasTermsAndPrivacyPolicyFeature && (
@@ -108,7 +113,7 @@ export default function Register() {
                   <a
                     target="_blank"
                     href={route('terms.show')}
-                    className="underline text-sm text-gray-600 hover:text-gray-900"
+                    className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
                   >
                     Terms of Service
                   </a>
@@ -116,7 +121,7 @@ export default function Register() {
                   <a
                     target="_blank"
                     href={route('policy.show')}
-                    className="underline text-sm text-gray-600 hover:text-gray-900"
+                    className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
                   >
                     Privacy Policy
                   </a>
@@ -128,12 +133,12 @@ export default function Register() {
         )}
 
         <div className="flex items-center justify-end mt-4">
-          <InertiaLink
+          <Link
             href={route('login')}
-            className="underline text-sm text-gray-600 hover:text-gray-900"
+            className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
           >
             Already registered?
-          </InertiaLink>
+          </Link>
 
           <PrimaryButton
             className={classNames('ml-4', { 'opacity-25': form.processing })}

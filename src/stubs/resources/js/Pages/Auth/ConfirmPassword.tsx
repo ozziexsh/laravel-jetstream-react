@@ -1,4 +1,4 @@
-import { useForm, Head } from '@inertiajs/inertia-react';
+import { useForm, Head } from '@inertiajs/react';
 import classNames from 'classnames';
 import React from 'react';
 import useRoute from '@/Hooks/useRoute';
@@ -25,7 +25,7 @@ export default function ConfirmPassword() {
     <AuthenticationCard>
       <Head title="Secure Area" />
 
-      <div className="mb-4 text-sm text-gray-600">
+      <div className="mb-4 text-sm text-gray-600 dark:text-gray-400">
         This is a secure area of the application. Please confirm your password
         before continuing.
       </div>

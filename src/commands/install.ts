@@ -3,6 +3,7 @@ import { execSync } from 'child_process';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as fse from 'fs-extra';
+import { glob } from 'glob';
 
 export default class Install extends Command {
   static description = 'Replaces vue with react in a fresh installation';
@@ -18,6 +19,7 @@ export default class Install extends Command {
     teams: Flags.boolean({ default: false }),
     ssr: Flags.boolean({ default: false }),
     force: Flags.boolean({ default: false }),
+    dark: Flags.boolean({ default: false }),
   };
 
   static args = [];
@@ -30,21 +32,20 @@ export default class Install extends Command {
     '@types/react': '^18.0.25',
     '@types/react-dom': '^18.0.8',
     '@types/ziggy-js': '^1.3.0',
-    '@vitejs/plugin-react': '^2.0.0',
+    '@vitejs/plugin-react': '^2.2.0',
     autoprefixer: '^10.4.7',
-    'laravel-vite-plugin': '^0.5.0',
+    'laravel-vite-plugin': '^0.5.4',
     postcss: '^8.4.14',
-    prettier: '^2.6.2',
-    tailwindcss: '^3.1.0',
+    prettier: '^2.8.4',
+    tailwindcss: '^3.2.7',
     typescript: '^4.6.3',
     vite: '^3.0.0',
   };
 
   private deps = {
-    '@headlessui/react': '^1.5.0',
-    '@inertiajs/inertia': '^0.11.1',
-    '@inertiajs/inertia-react': '^0.8.1',
-    '@inertiajs/progress': '^0.2.7',
+    '@headlessui/react': '^1.7.11',
+    '@inertiajs/core': '^1.0.2',
+    '@inertiajs/react': '^1.0.2',
     axios: '^0.26.1',
     classnames: '^2.3.1',
     lodash: '^4.17.21',
@@ -54,10 +55,8 @@ export default class Install extends Command {
   };
 
   private oldDeps = [
-    '@inertiajs/inertia',
-    '@inertiajs/inertia-vue3',
-    '@inertiajs/progress',
-    '@inertiajs/server',
+    '@inertiajs/core',
+    '@inertiajs/vue3',
     '@vitejs/plugin-vue',
     'laravel-vite-plugin',
     'vite',
@@ -161,6 +160,10 @@ export default class Install extends Command {
       fs.rmSync(path.join(process.cwd(), 'resources', 'js', 'ssr.tsx'));
     }
 
+    if (!flags.dark) {
+      this.removeDarkMode();
+    }
+
     this.log('Replacing app.blade.php');
     this.moveStub(
       'resources/views/app.blade.php',
@@ -186,5 +189,21 @@ export default class Install extends Command {
     return Object.entries(obj)
       .map(([key, value]) => `"${key}@${value}"`)
       .join(' ');
+  }
+
+  private removeDarkMode() {
+    const paths = glob.sync(path.join(process.cwd(), 'resources/js/**/*.tsx'));
+    for (const path of paths) {
+      if (path.endsWith('Pages/Welcome.tsx')) {
+        continue;
+      }
+
+      const contents = fs.readFileSync(path);
+
+      fs.writeFileSync(
+        path,
+        contents.toString().replace(/\sdark:[^\s"']+/g, ''),
+      );
+    }
   }
 }

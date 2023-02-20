@@ -20,8 +20,8 @@ import {
   TeamInvitation,
   User,
 } from '@/types';
-import { Inertia } from '@inertiajs/inertia';
-import { useForm } from '@inertiajs/inertia-react';
+import { router } from '@inertiajs/core';
+import { useForm } from '@inertiajs/react';
 import classNames from 'classnames';
 import React, { useState } from 'react';
 
@@ -71,7 +71,7 @@ export default function TeamMemberManager({
   }
 
   function cancelTeamInvitation(invitation: TeamInvitation) {
-    Inertia.delete(route('team-invitations.destroy', [invitation]), {
+    router.delete(route('team-invitations.destroy', [invitation]), {
       preserveScroll: true,
     });
   }
@@ -98,7 +98,7 @@ export default function TeamMemberManager({
 
   function leaveTeam() {
     leaveTeamForm.delete(
-      route('team-members.destroy', [team, page.props.user]),
+      route('team-members.destroy', [team, page.props.auth.user!]),
     );
   }
 
@@ -159,7 +159,7 @@ export default function TeamMemberManager({
             )}
           >
             <div className="col-span-6">
-              <div className="max-w-xl text-sm text-gray-600">
+              <div className="max-w-xl text-sm text-gray-600 dark:text-gray-400">
                 Please provide the email address of the person you would like to
                 add to this team.
               </div>
@@ -192,14 +192,15 @@ export default function TeamMemberManager({
                   className="mt-2"
                 />
 
-                <div className="relative z-0 mt-1 border border-gray-200 rounded-lg cursor-pointer">
+                <div className="relative z-0 mt-1 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer">
                   {availableRoles.map((role, i) => (
                     <button
                       type="button"
                       className={classNames(
-                        'relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200',
+                        'relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:outline-none focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-600',
                         {
-                          'border-t border-gray-200 rounded-t-none': i > 0,
+                          'border-t border-gray-200 dark:border-gray-700 focus:border-none rounded-t-none':
+                            i > 0,
                           'rounded-b-none':
                             i != Object.keys(availableRoles).length - 1,
                         },
@@ -219,10 +220,13 @@ export default function TeamMemberManager({
                         {/* <!-- Role Name --> */}
                         <div className="flex items-center">
                           <div
-                            className={classNames('text-sm text-gray-600', {
-                              'font-semibold':
-                                addTeamMemberForm.data.role == role.key,
-                            })}
+                            className={classNames(
+                              'text-sm text-gray-600 dark:text-gray-400',
+                              {
+                                'font-semibold':
+                                  addTeamMemberForm.data.role == role.key,
+                              },
+                            )}
                           >
                             {role.name}
                           </div>
@@ -243,7 +247,7 @@ export default function TeamMemberManager({
                         </div>
 
                         {/* <!-- Role Description --> */}
-                        <div className="mt-2 text-xs text-gray-600">
+                        <div className="mt-2 text-xs text-gray-600 dark:text-gray-400">
                           {role.description}
                         </div>
                       </div>
@@ -276,7 +280,9 @@ export default function TeamMemberManager({
                   className="flex items-center justify-between"
                   key={invitation.id}
                 >
-                  <div className="text-gray-600">{invitation.email}</div>
+                  <div className="text-gray-600 dark:text-gray-400">
+                    {invitation.email}
+                  </div>
 
                   <div className="flex items-center">
                     {/* <!-- Cancel Team Invitation --> */}
@@ -320,7 +326,7 @@ export default function TeamMemberManager({
                       src={user.profile_photo_url}
                       alt={user.name}
                     />
-                    <div className="ml-4">{user.name}</div>
+                    <div className="ml-4 dark:text-white">{user.name}</div>
                   </div>
 
                   <div className="flex items-center">
@@ -340,7 +346,7 @@ export default function TeamMemberManager({
                     ) : null}
 
                     {/* <!-- Leave Team --> */}
-                    {page.props.user.id === user.id ? (
+                    {page.props.auth.user?.id === user.id ? (
                       <button
                         className="cursor-pointer ml-6 text-sm text-red-500"
                         onClick={confirmLeavingTeam}
@@ -374,14 +380,15 @@ export default function TeamMemberManager({
         <DialogModal.Content title={'Manage Role'}></DialogModal.Content>
         {managingRoleFor ? (
           <div>
-            <div className="relative z-0 mt-1 border border-gray-200 rounded-lg cursor-pointer">
+            <div className="relative z-0 mt-1 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer">
               {availableRoles.map((role, i) => (
                 <button
                   type="button"
                   className={classNames(
-                    'relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200',
+                    'relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:outline-none focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-600',
                     {
-                      'border-t border-gray-200 rounded-t-none': i > 0,
+                      'border-t border-gray-200 dark:border-gray-700 focus:border-none rounded-t-none':
+                        i > 0,
                       'rounded-b-none':
                         i !== Object.keys(availableRoles).length - 1,
                     },
@@ -399,10 +406,13 @@ export default function TeamMemberManager({
                     {/* <!-- Role Name --> */}
                     <div className="flex items-center">
                       <div
-                        className={classNames('text-sm text-gray-600', {
-                          'font-semibold':
-                            updateRoleForm.data.role === role.key,
-                        })}
+                        className={classNames(
+                          'text-sm text-gray-600 dark:text-gray-400',
+                          {
+                            'font-semibold':
+                              updateRoleForm.data.role === role.key,
+                          },
+                        )}
                       >
                         {role.name}
                       </div>
@@ -422,7 +432,7 @@ export default function TeamMemberManager({
                     </div>
 
                     {/* <!-- Role Description --> */}
-                    <div className="mt-2 text-xs text-gray-600">
+                    <div className="mt-2 text-xs text-gray-600 dark:text-gray-400">
                       {role.description}
                     </div>
                   </div>

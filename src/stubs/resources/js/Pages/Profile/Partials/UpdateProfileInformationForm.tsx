@@ -1,5 +1,5 @@
-import { Inertia } from '@inertiajs/inertia';
-import { useForm, usePage } from '@inertiajs/inertia-react';
+import { router } from '@inertiajs/core';
+import { Link, useForm } from '@inertiajs/react';
 import classNames from 'classnames';
 import React, { useRef, useState } from 'react';
 import useRoute from '@/Hooks/useRoute';
@@ -11,6 +11,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import SecondaryButton from '@/Components/SecondaryButton';
 import { User } from '@/types';
+import useTypedPage from '@/Hooks/useTypedPage';
 
 interface Props {
   user: User;
@@ -26,7 +27,8 @@ export default function UpdateProfileInformationForm({ user }: Props) {
   const route = useRoute();
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
   const photoRef = useRef<HTMLInputElement>(null);
-  const page = usePage<any>();
+  const page = useTypedPage();
+  const [verificationLinkSent, setVerificationLinkSent] = useState(false);
 
   function updateProfileInformation() {
     form.post(route('user-profile-information.update'), {
@@ -59,7 +61,7 @@ export default function UpdateProfileInformationForm({ user }: Props) {
   }
 
   function deletePhoto() {
-    Inertia.delete(route('current-user-photo.destroy'), {
+    router.delete(route('current-user-photo.destroy'), {
       preserveScroll: true,
       onSuccess: () => {
         setPhotoPreview(null);
@@ -179,6 +181,32 @@ export default function UpdateProfileInformationForm({ user }: Props) {
           onChange={e => form.setData('email', e.currentTarget.value)}
         />
         <InputError message={form.errors.email} className="mt-2" />
+
+        {page.props.jetstream.hasEmailVerification &&
+        user.email_verified_at === null ? (
+          <div>
+            <p className="text-sm mt-2 dark:text-white">
+              Your email address is unverified.
+              <Link
+                href={route('verification.send')}
+                method="post"
+                as="button"
+                className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                onClick={e => {
+                  e.preventDefault();
+                  setVerificationLinkSent(true);
+                }}
+              >
+                Click here to re-send the verification email.
+              </Link>
+            </p>
+            {verificationLinkSent && (
+              <div className="mt-2 font-medium text-sm text-green-600 dark:text-green-400">
+                A new verification link has been sent to your email address.
+              </div>
+            )}
+          </div>
+        ) : null}
       </div>
     </FormSection>
   );

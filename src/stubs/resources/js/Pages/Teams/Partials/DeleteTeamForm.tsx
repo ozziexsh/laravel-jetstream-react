@@ -4,7 +4,7 @@ import ConfirmationModal from '@/Components/ConfirmationModal';
 import DangerButton from '@/Components/DangerButton';
 import SecondaryButton from '@/Components/SecondaryButton';
 import { Team } from '@/types';
-import { useForm } from '@inertiajs/inertia-react';
+import { useForm } from '@inertiajs/react';
 import classNames from 'classnames';
 import React, { useState } from 'react';
 
@@ -32,16 +32,14 @@ export default function DeleteTeamForm({ team }: Props) {
       title={'Delete Team'}
       description={'Permanently delete this team.'}
     >
-      <div className="max-w-xl text-sm text-gray-600">
+      <div className="max-w-xl text-sm text-gray-600 dark:text-gray-400">
         Once a team is deleted, all of its resources and data will be
         permanently deleted. Before deleting this team, please download any data
         or information regarding this team that you wish to retain.
       </div>
 
       <div className="mt-5">
-        <DangerButton onClick={confirmTeamDeletion}>
-          Delete Team
-        </DangerButton>
+        <DangerButton onClick={confirmTeamDeletion}>Delete Team</DangerButton>
       </div>
 
       {/* <!-- Delete Team Confirmation Modal --> */}

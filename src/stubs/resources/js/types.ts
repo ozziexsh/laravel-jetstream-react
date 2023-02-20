@@ -24,10 +24,12 @@ export interface User {
 }
 
 export interface Auth {
-  user: User & {
-    all_teams?: Team[];
-    current_team?: Team;
-  }
+  user: Nullable<
+    User & {
+      all_teams?: Team[];
+      current_team?: Team;
+    }
+  >;
 }
 
 export type InertiaSharedProps<T = {}> = T & {
@@ -42,6 +44,7 @@ export type InertiaSharedProps<T = {}> = T & {
     hasTeamFeatures: boolean;
     hasTermsAndPrivacyPolicyFeature: boolean;
     managesProfilePhotos: boolean;
+    hasEmailVerification: boolean;
   };
   auth: Auth;
   errorBags: any;

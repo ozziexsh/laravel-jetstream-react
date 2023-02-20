@@ -19,7 +19,9 @@ export default function ActionMessage({
         leave-from-class="opacity-100"
         leaveTo="opacity-0"
       >
-        <div className="text-sm text-gray-600">{children}</div>
+        <div className="text-sm text-gray-600 dark:text-gray-400">
+          {children}
+        </div>
       </Transition>
     </div>
   );

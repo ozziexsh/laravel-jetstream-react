@@ -1,4 +1,4 @@
-import { InertiaLink, useForm, Head } from '@inertiajs/inertia-react';
+import { Link, useForm, Head } from '@inertiajs/react';
 import classNames from 'classnames';
 import React from 'react';
 import useRoute from '@/Hooks/useRoute';
@@ -34,7 +34,9 @@ export default function Login({ canResetPassword, status }: Props) {
       <Head title="login" />
 
       {status && (
-        <div className="mb-4 font-medium text-sm text-green-600">{status}</div>
+        <div className="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
+          {status}
+        </div>
       )}
 
       <form onSubmit={onSubmit}>
@@ -75,29 +77,31 @@ export default function Login({ canResetPassword, status }: Props) {
                 form.setData('remember', e.currentTarget.checked ? 'on' : '')
               }
             />
-            <span className="ml-2 text-sm text-gray-600">Remember me</span>
+            <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">
+              Remember me
+            </span>
           </label>
         </div>
 
         <div className="flex flex-col space-y-2 md:flex-row md:items-center md:justify-between md:space-y-0 mt-4">
           {canResetPassword && (
             <div>
-              <InertiaLink
+              <Link
                 href={route('password.request')}
-                className="underline text-sm text-gray-600 hover:text-gray-900"
+                className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
               >
                 Forgot your password?
-              </InertiaLink>
+              </Link>
             </div>
           )}
 
           <div className="flex items-center justify-end">
-            <InertiaLink
+            <Link
               href={route('register')}
               className="underline text-sm text-gray-600 hover:text-gray-900"
             >
               Need an account?
-            </InertiaLink>
+            </Link>
 
             <PrimaryButton
               className={classNames('ml-4', { 'opacity-25': form.processing })}

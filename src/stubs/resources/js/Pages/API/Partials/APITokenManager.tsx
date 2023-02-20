@@ -1,4 +1,4 @@
-import { useForm, usePage } from '@inertiajs/inertia-react';
+import { useForm } from '@inertiajs/react';
 import classNames from 'classnames';
 import React, { useState } from 'react';
 import useRoute from '@/Hooks/useRoute';
@@ -16,6 +16,7 @@ import TextInput from '@/Components/TextInput';
 import SecondaryButton from '@/Components/SecondaryButton';
 import SectionBorder from '@/Components/SectionBorder';
 import { ApiToken } from '@/types';
+import useTypedPage from '@/Hooks/useTypedPage';
 
 interface Props {
   tokens: ApiToken[];
@@ -42,7 +43,7 @@ export default function APITokenManager({
     useState<ApiToken | null>(null);
   const [apiTokenBeingDeleted, setApiTokenBeingDeleted] =
     useState<ApiToken | null>(null);
-  const page = usePage<any>();
+  const page = useTypedPage();
 
   function createApiToken() {
     createApiTokenForm.post(route('api-tokens.store'), {
@@ -173,7 +174,7 @@ export default function APITokenManager({
                         }
                       }}
                     />
-                    <span className="ml-2 text-sm text-gray-600">
+                    <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">
                       {permission}
                     </span>
                   </label>
@@ -203,7 +204,9 @@ export default function APITokenManager({
                     className="flex items-center justify-between"
                     key={token.id}
                   >
-                    <div>{token.name}</div>
+                    <div className="break-all dark:text-white">
+                      {token.name}
+                    </div>
 
                     <div className="flex items-center">
                       {token.last_used_ago && (
@@ -247,7 +250,7 @@ export default function APITokenManager({
             again.
           </div>
 
-          <div className="mt-4 bg-gray-100 px-4 py-2 rounded font-mono text-sm text-gray-500">
+          <div className="mt-4 bg-gray-100 dark:bg-gray-900 px-4 py-2 rounded font-mono text-sm text-gray-500">
             {page.props?.jetstream?.flash?.token}
           </div>
         </DialogModal.Content>
@@ -293,7 +296,7 @@ export default function APITokenManager({
                       }
                     }}
                   />
-                  <span className="ml-2 text-sm text-gray-600">
+                  <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">
                     {permission}
                   </span>
                 </label>

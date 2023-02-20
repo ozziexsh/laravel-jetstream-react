@@ -24,7 +24,7 @@ export default function Show({
     <AppLayout
       title={'Profile'}
       renderHeader={() => (
-        <h2 className="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
           Profile
         </h2>
       )}
@@ -33,7 +33,7 @@ export default function Show({
         <div className="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
           {page.props.jetstream.canUpdateProfileInformation ? (
             <div>
-              <UpdateProfileInformationForm user={page.props.auth.user} />
+              <UpdateProfileInformationForm user={page.props.auth.user!} />
 
               <SectionBorder />
             </div>

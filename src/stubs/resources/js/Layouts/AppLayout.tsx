@@ -1,5 +1,5 @@
-import { Inertia } from '@inertiajs/inertia';
-import { InertiaLink, Head } from '@inertiajs/inertia-react';
+import { router } from '@inertiajs/core';
+import { Link, Head } from '@inertiajs/react';
 import classNames from 'classnames';
 import React, { PropsWithChildren, useState } from 'react';
 import useRoute from '@/Hooks/useRoute';
@@ -29,7 +29,7 @@ export default function AppLayout({
 
   function switchToTeam(e: React.FormEvent, team: Team) {
     e.preventDefault();
-    Inertia.put(
+    router.put(
       route('current-team.update'),
       {
         team_id: team.id,
@@ -42,7 +42,7 @@ export default function AppLayout({
 
   function logout(e: React.FormEvent) {
     e.preventDefault();
-    Inertia.post(route('logout'));
+    router.post(route('logout'));
   }
 
   return (
@@ -51,17 +51,17 @@ export default function AppLayout({
 
       <Banner />
 
-      <div className="min-h-screen bg-gray-100">
-        <nav className="bg-white border-b border-gray-100">
+      <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
+        <nav className="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
           {/* <!-- Primary Navigation Menu --> */}
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between h-16">
               <div className="flex">
                 {/* <!-- Logo --> */}
                 <div className="flex-shrink-0 flex items-center">
-                  <InertiaLink href={route('dashboard')}>
+                  <Link href={route('dashboard')}>
                     <ApplicationMark className="block h-9 w-auto" />
-                  </InertiaLink>
+                  </Link>
                 </div>
 
                 {/* <!-- Navigation Links --> */}
@@ -86,9 +86,9 @@ export default function AppLayout({
                         <span className="inline-flex rounded-md">
                           <button
                             type="button"
-                            className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition"
+                            className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none focus:bg-gray-50 dark:focus:bg-gray-700 active:bg-gray-50 dark:active:bg-gray-700 transition ease-in-out duration-150"
                           >
-                            {page.props.auth.user.current_team?.name}
+                            {page.props.auth.user?.current_team?.name}
 
                             <svg
                               className="ml-2 -mr-0.5 h-4 w-4"
@@ -117,7 +117,7 @@ export default function AppLayout({
                             {/* <!-- Team Settings --> */}
                             <DropdownLink
                               href={route('teams.show', [
-                                page.props.auth.user.current_team!,
+                                page.props.auth.user?.current_team!,
                               ])}
                             >
                               Team Settings
@@ -129,14 +129,14 @@ export default function AppLayout({
                               </DropdownLink>
                             ) : null}
 
-                            <div className="border-t border-gray-100"></div>
+                            <div className="border-t border-gray-200 dark:border-gray-600" />
 
                             {/* <!-- Team Switcher --> */}
                             <div className="block px-4 py-2 text-xs text-gray-400">
                               Switch Teams
                             </div>
 
-                            {page.props.auth.user.all_teams?.map(team => (
+                            {page.props.auth.user?.all_teams?.map(team => (
                               <form
                                 onSubmit={e => switchToTeam(e, team)}
                                 key={team.id}
@@ -144,7 +144,7 @@ export default function AppLayout({
                                 <DropdownLink as="button">
                                   <div className="flex items-center">
                                     {team.id ==
-                                      page.props.auth.user.current_team_id && (
+                                      page.props.auth.user?.current_team_id && (
                                       <svg
                                         className="mr-2 h-5 w-5 text-green-400"
                                         fill="none"
@@ -179,17 +179,17 @@ export default function AppLayout({
                         <button className="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
                           <img
                             className="h-8 w-8 rounded-full object-cover"
-                            src={page.props.auth.user.profile_photo_url}
-                            alt={page.props.auth.user.name}
+                            src={page.props.auth.user?.profile_photo_url}
+                            alt={page.props.auth.user?.name}
                           />
                         </button>
                       ) : (
                         <span className="inline-flex rounded-md">
                           <button
                             type="button"
-                            className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition"
+                            className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none focus:bg-gray-50 dark:focus:bg-gray-700 active:bg-gray-50 dark:active:bg-gray-700 transition ease-in-out duration-150"
                           >
-                            {page.props.auth.user.name}
+                            {page.props.auth.user?.name}
 
                             <svg
                               className="ml-2 -mr-0.5 h-4 w-4"
@@ -198,9 +198,9 @@ export default function AppLayout({
                               fill="currentColor"
                             >
                               <path
-                                fillRule="evenodd"
-                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                clipRule="evenodd"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M19.5 8.25l-7.5 7.5-7.5-7.5"
                               />
                             </svg>
                           </button>
@@ -223,7 +223,7 @@ export default function AppLayout({
                       </DropdownLink>
                     ) : null}
 
-                    <div className="border-t border-gray-100"></div>
+                    <div className="border-t border-gray-200 dark:border-gray-600"></div>
 
                     {/* <!-- Authentication --> */}
                     <form onSubmit={logout}>
@@ -239,7 +239,7 @@ export default function AppLayout({
                   onClick={() =>
                     setShowingNavigationDropdown(!showingNavigationDropdown)
                   }
-                  className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition"
+                  className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out"
                 >
                   <svg
                     className="h-6 w-6"
@@ -290,24 +290,24 @@ export default function AppLayout({
             </div>
 
             {/* <!-- Responsive Settings Options --> */}
-            <div className="pt-4 pb-1 border-t border-gray-200">
+            <div className="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
               <div className="flex items-center px-4">
                 {page.props.jetstream.managesProfilePhotos ? (
                   <div className="flex-shrink-0 mr-3">
                     <img
                       className="h-10 w-10 rounded-full object-cover"
-                      src={page.props.auth.user.profile_photo_url}
-                      alt={page.props.auth.user.name}
+                      src={page.props.auth.user?.profile_photo_url}
+                      alt={page.props.auth.user?.name}
                     />
                   </div>
                 ) : null}
 
                 <div>
-                  <div className="font-medium text-base text-gray-800">
-                    {page.props.auth.user.name}
+                  <div className="font-medium text-base text-gray-800 dark:text-gray-200">
+                    {page.props.auth.user?.name}
                   </div>
                   <div className="font-medium text-sm text-gray-500">
-                    {page.props.auth.user.email}
+                    {page.props.auth.user?.email}
                   </div>
                 </div>
               </div>
@@ -331,15 +331,13 @@ export default function AppLayout({
 
                 {/* <!-- Authentication --> */}
                 <form method="POST" onSubmit={logout}>
-                  <ResponsiveNavLink as="button">
-                    Log Out
-                  </ResponsiveNavLink>
+                  <ResponsiveNavLink as="button">Log Out</ResponsiveNavLink>
                 </form>
 
                 {/* <!-- Team Management --> */}
                 {page.props.jetstream.hasTeamFeatures ? (
                   <>
-                    <div className="border-t border-gray-200"></div>
+                    <div className="border-t border-gray-200 dark:border-gray-600"></div>
 
                     <div className="block px-4 py-2 text-xs text-gray-400">
                       Manage Team
@@ -348,7 +346,7 @@ export default function AppLayout({
                     {/* <!-- Team Settings --> */}
                     <ResponsiveNavLink
                       href={route('teams.show', [
-                        page.props.auth.user.current_team!,
+                        page.props.auth.user?.current_team!,
                       ])}
                       active={route().current('teams.show')}
                     >
@@ -364,7 +362,7 @@ export default function AppLayout({
                       </ResponsiveNavLink>
                     ) : null}
 
-                    <div className="border-t border-gray-200"></div>
+                    <div className="border-t border-gray-200 dark:border-gray-600"></div>
 
                     {/* <!-- Team Switcher --> */}
                     <div className="block px-4 py-2 text-xs text-gray-400">
@@ -374,7 +372,8 @@ export default function AppLayout({
                       <form onSubmit={e => switchToTeam(e, team)} key={team.id}>
                         <ResponsiveNavLink as="button">
                           <div className="flex items-center">
-                            {team.id == page.props.auth.user.current_team_id && (
+                            {team.id ==
+                              page.props.auth.user?.current_team_id && (
                               <svg
                                 className="mr-2 h-5 w-5 text-green-400"
                                 fill="none"
@@ -401,7 +400,7 @@ export default function AppLayout({
 
         {/* <!-- Page Heading --> */}
         {renderHeader ? (
-          <header className="bg-white shadow">
+          <header className="bg-white dark:bg-gray-800 shadow">
             <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
               {renderHeader()}
             </div>

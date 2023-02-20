@@ -202,7 +202,7 @@ export default class Install extends Command {
 
       fs.writeFileSync(
         path,
-        contents.toString().replace(/\sdark:[^\s"']+/g, '')
+        contents.toString().replace(/\sdark:[^\s"']+/g, ''),
       );
     }
   }

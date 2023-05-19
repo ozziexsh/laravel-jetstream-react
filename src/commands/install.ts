@@ -34,7 +34,7 @@ export default class Install extends Command {
     '@types/ziggy-js': '^1.3.0',
     '@vitejs/plugin-react': '^2.2.0',
     autoprefixer: '^10.4.7',
-    'laravel-vite-plugin': '^0.5.4',
+    'laravel-vite-plugin': '^0.7.7',
     postcss: '^8.4.14',
     prettier: '^2.8.4',
     tailwindcss: '^3.2.7',

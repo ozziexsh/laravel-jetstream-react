@@ -1,3 +1,10 @@
+> [!NOTE]
+> **2024 update**: Although there have been no new additions to this repo in a few years, it still works with the latest Laravel Jetstream version. I intend to keep this repo functional as long as the official Jetstream starter kit is being maintained.
+>
+> If you're starting a new React and Laravel project I would recommend using [Laravel Breeze](https://github.com/laravel/breeze) instead as it has a first party React version with almost all of the same features.
+>
+> If you are having issues with the converter please open an issue!
+
 # Laravel Jetstream React CLI
 
 [![Latest Version on NPM](https://img.shields.io/npm/v/laravel-jetstream-react.svg?style=flat-square)](https://www.npmjs.com/package/laravel-jetstream-react)

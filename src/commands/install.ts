@@ -25,33 +25,31 @@ export default class Install extends Command {
   static args = [];
 
   private devDeps = {
-    '@prettier/plugin-php': '^0.18.4',
-    '@tailwindcss/forms': '^0.5.2',
-    '@tailwindcss/typography': '^0.5.2',
+    '@prettier/plugin-php': '^0.22.2',
+    '@tailwindcss/forms': '^0.5.8',
+    '@tailwindcss/typography': '^0.5.15',
     '@types/lodash': '^4.14.181',
-    '@types/react': '^18.0.25',
-    '@types/react-dom': '^18.0.8',
-    '@types/ziggy-js': '^1.3.0',
-    '@vitejs/plugin-react': '^2.2.0',
-    autoprefixer: '^10.4.7',
-    'laravel-vite-plugin': '^0.7.7',
-    postcss: '^8.4.14',
-    prettier: '^2.8.4',
-    tailwindcss: '^3.2.7',
-    typescript: '^4.6.3',
-    vite: '^3.0.0',
+    '@types/react': '^18.3.5',
+    '@types/react-dom': '^18.3.0',
+    '@vitejs/plugin-react': '^4.3.1',
+    autoprefixer: '^10.4.20',
+    'laravel-vite-plugin': '^1.0.5',
+    postcss: '^8.4.41',
+    prettier: '^3.3.3',
+    tailwindcss: '^3.4.10',
+    typescript: '^5.5.4',
+    vite: '^5.4.2',
   };
 
   private deps = {
-    '@headlessui/react': '^1.7.11',
-    '@inertiajs/core': '^1.0.2',
-    '@inertiajs/react': '^1.0.2',
-    axios: '^0.26.1',
-    classnames: '^2.3.1',
+    '@headlessui/react': '^2.1.3',
+    '@inertiajs/react': '^1.2.0',
+    axios: '^1.7.6',
+    classnames: '^2.5.1',
     lodash: '^4.17.21',
-    react: '^18.2.0',
-    'react-dom': '^18.2.0',
-    'ziggy-js': '^1.4.5',
+    react: '^18.3.1',
+    'react-dom': '^18.3.1',
+    'ziggy-js': '^2.3.0',
   };
 
   private oldDeps = [

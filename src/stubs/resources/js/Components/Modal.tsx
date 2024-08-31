@@ -1,4 +1,4 @@
-import { Dialog, Transition } from '@headlessui/react';
+import { Dialog, Transition, TransitionChild } from '@headlessui/react';
 import classNames from 'classnames';
 import React, { PropsWithChildren } from 'react';
 import ReactDOM from 'react-dom';
@@ -28,7 +28,7 @@ export default function Modal({
   }
 
   return ReactDOM.createPortal(
-    <Transition.Root show={isOpen} as={React.Fragment}>
+    <Transition show={isOpen} as={React.Fragment}>
       <Dialog
         as="div"
         static
@@ -37,7 +37,7 @@ export default function Modal({
         onClose={onClose}
       >
         <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-          <Transition.Child
+          <TransitionChild
             as={React.Fragment}
             enter="ease-out duration-300"
             enterFrom="opacity-0"
@@ -46,8 +46,8 @@ export default function Modal({
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Dialog.Overlay className="fixed inset-0 bg-gray-500 dark:bg-gray-900 bg-opacity-75 transition-opacity" />
-          </Transition.Child>
+            <div className="fixed inset-0 bg-gray-500 dark:bg-gray-900 bg-opacity-75 transition-opacity" />
+          </TransitionChild>
 
           {/* This element is to trick the browser into centering the modal contents. */}
           <span
@@ -56,7 +56,7 @@ export default function Modal({
           >
             &#8203;
           </span>
-          <Transition.Child
+          <TransitionChild
             as={React.Fragment}
             enter="ease-out duration-300"
             enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
@@ -73,10 +73,10 @@ export default function Modal({
             >
               {children}
             </div>
-          </Transition.Child>
+          </TransitionChild>
         </div>
       </Dialog>
-    </Transition.Root>,
+    </Transition>,
     document.body,
   );
 }

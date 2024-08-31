@@ -51,23 +51,24 @@ export default function Dropdown({
         leave="transition ease-in duration-75"
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
-        className={'relative z-50'}
       >
-        <div
-          className={classNames(
-            'absolute mt-2 rounded-md shadow-lg',
-            widthClass,
-            alignmentClasses,
-          )}
-          onClick={() => setOpen(false)}
-        >
+        <div className={'relative z-50'}>
           <div
             className={classNames(
-              'rounded-md ring-1 ring-black ring-opacity-5',
-              contentClasses,
+              'absolute mt-2 rounded-md shadow-lg',
+              widthClass,
+              alignmentClasses,
             )}
+            onClick={() => setOpen(false)}
           >
-            {children}
+            <div
+              className={classNames(
+                'rounded-md ring-1 ring-black ring-opacity-5',
+                contentClasses,
+              )}
+            >
+              {children}
+            </div>
           </div>
         </div>
       </Transition>

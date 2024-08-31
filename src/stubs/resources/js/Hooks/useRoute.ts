@@ -1,4 +1,4 @@
-import route from 'ziggy-js';
+import { route } from 'ziggy-js';
 import { createContext, useContext } from 'react';
 
 export const RouteContext = createContext<typeof route | null>(null);

@@ -105,7 +105,7 @@ First install dependencies and run the build script
 
 ```shell
 npm install
-npm build
+npm run build
 ```
 
 Then create a fresh laravel install with jetstream
